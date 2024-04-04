@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <link rel="stylesheet" href="{%static 'css/index.css'%}">
+    <title>Document</title>
+</head>
+<body>
+  
+<div>
+    <div id='result' style="visibility: visible;">
+        <span class="sp">Ask Something ?</span>
+    </div>
+    <br>
+    <div id= 'record'>
+        <button onclick="startConverting()" class='btn btn-info btn-sm' id="re">ASK Question</button>
+        <button  onclick="toggleSpeechSynthesis()" class='btn btn-info btn-sm' value="Stop" id="send" style="visibility: hidden;">Stop Listening</button>
+
+        
+        <button  onclick="Stop_Response()" class='btn btn-info btn-sm' value="Stop" id="stop_Response" style="visibility: hidden;">Stop Response</button>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/speech.js' %}"></script>
+    {% if condition_to_call_js_function %}
+    <script>
+        function myFunction(){
+            console.log("enter separate funnnnnn");
+            var Stop_Response = document.getElementById("stop_Response");
+            Stop_Response.style.visibility = "hidden";
+        }
+        myFunction();  
+    </script>
+{% endif %}
+  </div>
+</body>
+</html>
