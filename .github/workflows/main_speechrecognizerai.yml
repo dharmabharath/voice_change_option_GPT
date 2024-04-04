@@ -29,12 +29,10 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
-<<<<<<< HEAD
 
       - name: Run collectstatic
         run: python manage.py collectstatic
-=======
->>>>>>> d430b7883d2eb0df984d7f369edaeea1ac0c5c1c
+
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
