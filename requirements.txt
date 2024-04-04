@@ -1,4 +1,5 @@
 Django
+requests
 whitenoise
 openai
 azure-cognitiveservices-speech
