@@ -10,7 +10,8 @@ from django.views.decorators.http import require_http_methods
 
 stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
-audio_output_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
+file_name = "outputaudio.wav"
+audio_output_config = speechsdk.audio.AudioOutputConfig(filename=file_name)
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
 stopResponseButton=True
 
