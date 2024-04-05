@@ -8,10 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 
+os.system('sudo apt-get install libasound2-dev')
 stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
 file_name = "outputaudio.wav"
-audio_output_config = speechsdk.audio.AudioOutputConfig(filename=file_name)
+audio_output_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
 stopResponseButton=True
 
@@ -42,7 +43,6 @@ def ask_openai(request):
 
         # iterate through the stream response stream
         try:
-            # stopResponseButton=True
             for chunk in response:                
                 if len(chunk.choices) > 0:
                     chunk_message = chunk.choices[0].delta.content  # extract the message
@@ -57,8 +57,7 @@ def ask_openai(request):
                                
                                 collected_messages.clear()
                                 print("stopResponseButton",stopResponseButton)
-            sendhidebuttoncommand(request)
-            # stopResponseButton=False         
+            sendhidebuttoncommand(request)  
 
         except Exception as e:
             print("Erroe",e)
