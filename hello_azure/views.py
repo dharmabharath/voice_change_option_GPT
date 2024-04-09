@@ -4,8 +4,8 @@ from django.http import JsonResponse
 import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
-# import wave
-# import pyaudio
+import wave
+import pyaudio
 
 stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
@@ -77,7 +77,7 @@ def signal_stop_speech(request):
    
 
 #playing stored audio file
-# def play_wav_file(file_path):
+def play_wav_file(file_path):
     global stop_playback
     s=file_path
     chunk = 1024
@@ -104,7 +104,7 @@ def signal_stop_speech(request):
 
     # Close PyAudio
     p.terminate()
-    empty_wav_file(s)
+    # empty_wav_file(s)
 
 
 
@@ -121,3 +121,7 @@ def signal_stop_speech(request):
 #     global stop_playback
 #     stop_playback = True
 #     return JsonResponse({'status': 'success'})
+
+
+def stop_playback_handler():
+    return None
