@@ -5,8 +5,8 @@ import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
 from django.views.decorators.http import require_http_methods
-# import wave
-# import pyaudio
+import wave
+import pyaudio
 
 stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
