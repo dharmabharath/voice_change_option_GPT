@@ -4,8 +4,8 @@ from django.http import JsonResponse
 import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
-import wave
-import pyaudio
+# import wave
+# import pyaudio
 
 stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
@@ -58,7 +58,7 @@ def ask_openai(request):
             print("Erroe",e)
         if last_tts_request:
             last_tts_request.get()
-        play_wav_file(file_name)
+        # play_wav_file(file_name)
         return JsonResponse({'message': 'Speech synthesis completed'}, status=200)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
@@ -77,7 +77,7 @@ def signal_stop_speech(request):
    
 
 #playing stored audio file
-def play_wav_file(file_path):
+# def play_wav_file(file_path):
     global stop_playback
     s=file_path
     chunk = 1024
@@ -109,15 +109,15 @@ def play_wav_file(file_path):
 
 
 #after new response received the file to remove any existing data
-def empty_wav_file(file_path):
-    with open(file_path, 'wb') as wf:
-        wf.truncate()
+# def empty_wav_file(file_path):
+#     with open(file_path, 'wb') as wf:
+#         wf.truncate()
 
 
 
 #stop read date when click stopResponse button
-@csrf_exempt
-def stop_playback_handler(data):
-    global stop_playback
-    stop_playback = True
-    return JsonResponse({'status': 'success'})
+# @csrf_exempt
+# def stop_playback_handler(data):
+#     global stop_playback
+#     stop_playback = True
+#     return JsonResponse({'status': 'success'})
