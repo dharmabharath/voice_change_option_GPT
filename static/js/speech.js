@@ -5,12 +5,14 @@ var spr = new webkitSpeechRecognition() || SpeechRecognition();
 var sendButton;
 var r = document.getElementById("result");
 let without_speech = "";
-function startConverting() {
 
+
+//start speech listening
+function startConverting() {
   ftr = "";
   console.log("enter");
-  without_speech="";
-  console.log("enter log speech ",without_speech);
+  without_speech = "";
+  console.log("enter log speech ", without_speech);
   var sendButtons = document.getElementById("stop_Response");
   sendButtons.style.visibility = "hidden";
   var button = document.getElementById("re");
@@ -20,7 +22,6 @@ function startConverting() {
   sendButton.style.visibility = "visible";
 
   r.innerHTML = "Listening ......";
-  // var spr=new webkitSpeechRecognition() || SpeechRecognition(); //Initialisation of web Kit
   spr.continuous = false; //True if continous conversion is needed, false to stop transalation when paused
   spr.interimResults = true;
   spr.lang = "en-IN"; // Set Input language
@@ -58,12 +59,9 @@ function startConverting() {
         data: {
           send: ftr,
         },
-        //   success: function(){
-        //       alert("Audio succesfully Submitted");
-        //   }
+
       });
       ftr = "";
-      // var sendButton = document.getElementById("send");
       var sendButtons = document.getElementById("stop_Response");
       sendButtons.style.visibility = "visible";
     }
@@ -78,6 +76,9 @@ function startConverting() {
     }
   };
 }
+
+
+
 function toggleSpeechSynthesis() {
   without_speech = "nospeech";
   r.innerHTML = " Ask Something ?";
@@ -87,6 +88,8 @@ function toggleSpeechSynthesis() {
   sendButton.style.visibility = "hidden";
 }
 
+
+// stop reading
 function Stop_Response() {
   $.ajax({
     type: "POST",
@@ -102,11 +105,3 @@ function Stop_Response() {
   Stop_Response.style.visibility = "hidden";
 }
 
-
-// let sevalue = "{{stopResponseButton}}";
-// console.log("stopResponseButton", sevalue);
-// if (!sevalue) {
-//   console.log("enteree respnse value");
-//   var sendButtons = document.getElementById("stop_Response");
-//   sendButtons.style.visibility = "hidden";
-// }
