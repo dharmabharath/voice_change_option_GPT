@@ -4,6 +4,7 @@ from django.http import JsonResponse
 import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
+from django.views.decorators.http import require_http_methods
 import wave
 import pyaudio
 
@@ -77,51 +78,52 @@ def signal_stop_speech(request):
    
 
 #playing stored audio file
-# def play_wav_file(file_path):
-#     global stop_playback
-#     s=file_path
-#     chunk = 1024
-#     wf = wave.open(file_path, 'rb')
-#     p = pyaudio.PyAudio()
+def play_wav_file(file_path):
+    global stop_playback
+    s=file_path
+    chunk = 1024
+    wf = wave.open(file_path, 'rb')
+    p = pyaudio.PyAudio()
 
-#     # Open stream
-#     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-#                     channels=wf.getnchannels(),
-#                     rate=wf.getframerate(),
-#                     output=True)
+    # Open stream
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
 
-#     # Read data
-#     data = wf.readframes(chunk)
+    # Read data
+    data = wf.readframes(chunk)
 
-#     # Play stream
-#     while data and not stop_playback:
-#         stream.write(data)
-#         data = wf.readframes(chunk)
+    # Play stream
+    while data and not stop_playback:
+        stream.write(data)
+        data = wf.readframes(chunk)
 
-#     # Stop stream
-#     stream.stop_stream()
-#     stream.close()
+    # Stop stream
+    stream.stop_stream()
+    stream.close()
 
-#     # Close PyAudio
-#     p.terminate()
-    # empty_wav_file(s)
+    # Close PyAudio
+    p.terminate()
+    empty_wav_file(s)
 
 
 
 #after new response received the file to remove any existing data
-# def empty_wav_file(file_path):
-#     with open(file_path, 'wb') as wf:
-#         wf.truncate()
+def empty_wav_file(file_path):
+    with open(file_path, 'wb') as wf:
+        wf.truncate()
 
 
 
 #stop read date when click stopResponse button
-# @csrf_exempt
-# def stop_playback_handler(data):
-#     global stop_playback
-#     stop_playback = True
-#     return JsonResponse({'status': 'success'})
+@csrf_exempt
+@require_http_methods(["POST"])
+def stop_playback_handler(data):
+    global stop_playback
+    stop_playback = True
+    return JsonResponse({'status': 'success'})
 
 
-def stop_playback_handler():
-    return None
+# def stop_playback_handler():
+#     return None
