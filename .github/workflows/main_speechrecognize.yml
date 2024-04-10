@@ -29,10 +29,9 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
           sudo apt update
-          sudo apt install python3-pyaudio
-          
+          sudo apt install portaudio19-dev python3-pyaudio -y
+          pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -62,6 +61,12 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install portaudio19-dev python3-pyaudio -y
+          pip install -r requirements.txt
 
       
       - name: 'Deploy to Azure Web App'
