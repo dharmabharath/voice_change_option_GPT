@@ -105,30 +105,3 @@ function Stop_Response() {
   var Stop_Response = document.getElementById("stop_Response");
   Stop_Response.style.visibility = "hidden";
 }
-
-
-
-// function playAudio(){
-//   audio.play();
-// }
-
-// function playAudio(){
-//   audio.pause();
-// }
-
-
-
-// function callDjangoView() {
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', '/my-view/', true); // Replace '/my-view/' with the URL of your Django view
-//   xhr.onreadystatechange = function () {
-//       if (xhr.readyState == XMLHttpRequest.DONE) {
-//           if (xhr.status == 200) {
-//               var response = JSON.parse(xhr.responseText);
-//               console.log(response.message); // This will log 'Hello from Django!' to the console
-//               // You can call your JavaScript functions here
-//           }
-//       }
-//   };
-//   xhr.send();
-// }
