@@ -5,8 +5,8 @@ import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
 from django.views.decorators.http import require_http_methods
-import wave
 import pyaudio
+import wave
 
 stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="49a5b50e9b5d435eab3fbc6ffb1d11fe", region="eastus")
@@ -52,14 +52,15 @@ def ask_openai(request):
                             text = ''.join(collected_messages).strip() # join the recieved message together to build a sentence
                             if text != '' and stop_speech_synthesis!=True: # if sentence only have \n or space, we could skip
                                 print(f"Speech synthesized to speaker for: {text}")
-                                last_tts_request = speech_synthesizer.speak_text_async(text)                               
+                                last_tts_request = speech_synthesizer.speak_text_async(text)  
+                                print("text",last_tts_request)                             
                                 collected_messages.clear()
                                 
         except Exception as e:
             print("Erroe",e)
         if last_tts_request:
             last_tts_request.get()
-        play_wav_file(file_name)
+        # play_wav_file(file_name)
         return JsonResponse({'message': 'Speech synthesis completed'}, status=200)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
@@ -75,7 +76,7 @@ def signal_stop_speech(request):
             speech_synthesizer.stop_speaking_async()
             stop_speech_synthesis = False
             return JsonResponse({'status': 'success'}) 
-   
+
 
 #playing stored audio file
 def play_wav_file(file_path):
@@ -109,7 +110,7 @@ def play_wav_file(file_path):
 
 
 
-# after new response received the file to remove any existing data
+#after new response received the file to remove any existing data
 def empty_wav_file(file_path):
     with open(file_path, 'wb') as wf:
         wf.truncate()
@@ -120,10 +121,8 @@ def empty_wav_file(file_path):
 @csrf_exempt
 @require_http_methods(["POST"])
 def stop_playback_handler(data):
-    global stop_playback
-    stop_playback = True
-    return JsonResponse({'status': 'success'})
+    return None
+    # global stop_playback
+    # stop_playback = True
+    # return JsonResponse({'status': 'success'})
 
-
-# def stop_playback_handler():
-#     return None

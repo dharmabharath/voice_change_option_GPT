@@ -5,6 +5,7 @@ var spr = new webkitSpeechRecognition() || SpeechRecognition();
 var sendButton;
 var r = document.getElementById("result");
 let without_speech = "";
+var audio=document.getElementById("myAudio")
 
 
 //start speech listening
@@ -104,4 +105,3 @@ function Stop_Response() {
   var Stop_Response = document.getElementById("stop_Response");
   Stop_Response.style.visibility = "hidden";
 }
-

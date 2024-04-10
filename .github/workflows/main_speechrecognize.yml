@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - speechrecognizerai
+name: Build and deploy Python app to Azure Web App - speechrecognize
 
 on:
   push:
@@ -28,10 +28,7 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y portaudio19-dev
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -67,6 +64,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'speechrecognizerai'
+          app-name: 'speechrecognize'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AB878278A7334FF19E812D8459587544 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F7A4A4838632453BB4707E0186A16459 }}
