@@ -5,8 +5,10 @@ import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
 from django.views.decorators.http import require_http_methods
-import wave
-import pyaudio
+import sounddevice as sd
+import soundfile as sf
+# import wave
+# import pyaudio
 
 stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
@@ -59,6 +61,7 @@ def ask_openai(request):
             print("Erroe",e)
         if last_tts_request:
             last_tts_request.get()
+        my_view(request)
         # play_wav_file(file_name)
         return JsonResponse({'message': 'Speech synthesis completed'}, status=200)
 
@@ -77,42 +80,64 @@ def signal_stop_speech(request):
             return JsonResponse({'status': 'success'}) 
    
 
+
+
+
+
+def my_view(request):
+    # print("hello")
+    # return None
+    data, fs = sf.read('outputaudio.wav')
+    sd.play(data, fs)
+    sd.wait()
+
+# def my_view(request):
+    # # Your server-side logic here
+    # data = {'message': 'Hello from Django!'}
+    # return JsonResponse(data)
+
+
+
+
+
+
+
 #playing stored audio file
-def play_wav_file(file_path):
-    global stop_playback
-    s=file_path
-    chunk = 1024
-    wf = wave.open(file_path, 'rb')
-    p = pyaudio.PyAudio()
+# def play_wav_file(file_path):
+#     global stop_playback
+#     s=file_path
+#     chunk = 1024
+#     wf = wave.open(file_path, 'rb')
+#     p = pyaudio.PyAudio()
 
-    # Open stream
-    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-                    channels=wf.getnchannels(),
-                    rate=wf.getframerate(),
-                    output=True)
+#     # Open stream
+#     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+#                     channels=wf.getnchannels(),
+#                     rate=wf.getframerate(),
+#                     output=True)
 
-    # Read data
-    data = wf.readframes(chunk)
+#     # Read data
+#     data = wf.readframes(chunk)
 
-    # Play stream
-    while data and not stop_playback:
-        stream.write(data)
-        data = wf.readframes(chunk)
+#     # Play stream
+#     while data and not stop_playback:
+#         stream.write(data)
+#         data = wf.readframes(chunk)
 
-    # Stop stream
-    stream.stop_stream()
-    stream.close()
+#     # Stop stream
+#     stream.stop_stream()
+#     stream.close()
 
-    # Close PyAudio
-    p.terminate()
-    empty_wav_file(s)
+#     # Close PyAudio
+#     p.terminate()
+#     empty_wav_file(s)
 
 
 
-#after new response received the file to remove any existing data
-def empty_wav_file(file_path):
-    with open(file_path, 'wb') as wf:
-        wf.truncate()
+# after new response received the file to remove any existing data
+# def empty_wav_file(file_path):
+#     with open(file_path, 'wb') as wf:
+#         wf.truncate()
 
 
 

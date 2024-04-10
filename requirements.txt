@@ -3,4 +3,5 @@ requests
 whitenoise
 openai
 azure-cognitiveservices-speech
-pyaudio
+sounddevice
+soundfile
