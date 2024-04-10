@@ -62,12 +62,10 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
-      - name: Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'speechrecognize'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F7A4A4838632453BB4707E0186A16459 }}
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt-get install python3-dev portaudio19-dev
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
