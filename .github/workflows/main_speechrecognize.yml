@@ -30,8 +30,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install python3-pyaudio
-          pip3 install -r requirements.txt
+          sudo apt-get install python3-dev portaudio19-dev
+          pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -62,16 +62,12 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
-      - name: Install portaudio on Azure Web App
+      - name: Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'speechrecognize'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F7A4A4838632453BB4707E0186A16459 }}
-          inline-script: |
-            sudo apt-get update
-            sudo apt install python3-pyaudio
-            pip3 install -r requirements.txt
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
