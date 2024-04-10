@@ -4,3 +4,4 @@ whitenoise
 openai
 azure-cognitiveservices-speech
 pyaudio
+SpeechRecognition
