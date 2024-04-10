@@ -5,8 +5,8 @@ import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
 from django.views.decorators.http import require_http_methods
-import sounddevice as sd
-import soundfile as sf
+# import sounddevice as sd
+# import soundfile as sf
 # import wave
 # import pyaudio
 
@@ -61,7 +61,7 @@ def ask_openai(request):
             print("Erroe",e)
         if last_tts_request:
             last_tts_request.get()
-        my_view(request)
+        # my_view(request)
         # play_wav_file(file_name)
         return JsonResponse({'message': 'Speech synthesis completed'}, status=200)
 
@@ -84,12 +84,12 @@ def signal_stop_speech(request):
 
 
 
-def my_view(request):
-    # print("hello")
-    # return None
-    data, fs = sf.read('outputaudio.wav')
-    sd.play(data, fs)
-    sd.wait()
+# def my_view(request):
+#     # print("hello")
+#     # return None
+#     data, fs = sf.read('outputaudio.wav')
+#     sd.play(data, fs)
+#     sd.wait()
 
 # def my_view(request):
     # # Your server-side logic here
