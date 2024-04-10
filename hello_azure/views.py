@@ -50,7 +50,8 @@ def ask_openai(request):
                             text = ''.join(collected_messages).strip() # join the recieved message together to build a sentence
                             if text != '' and stop_speech_synthesis!=True: # if sentence only have \n or space, we could skip
                                 print(f"Speech synthesized to speaker for: {text}")
-                                last_tts_request = speech_synthesizer.speak_text_async(text)                               
+                                last_tts_request = speech_synthesizer.speak_text_async(text)  
+                                print("text",last_tts_request)                             
                                 collected_messages.clear()
                                 
         except Exception as e:
