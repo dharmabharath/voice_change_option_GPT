@@ -69,8 +69,8 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F7A4A4838632453BB4707E0186A16459 }}
           inline-script: |
-            apt-get update
-            apt-get install -y portaudio19-dev
+            sudo apt-get update
+            sudo apt-get install -y portaudio19-dev
             pip3 install -r requirements.txt
 
       - name: 'Deploy to Azure Web App'
