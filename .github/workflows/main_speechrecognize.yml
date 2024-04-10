@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install portaudio19-dev python-pyaudio
-          pip install PyAudio
+          pip install pyaudio
           pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
