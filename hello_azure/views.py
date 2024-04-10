@@ -121,6 +121,7 @@ def empty_wav_file(file_path):
 @csrf_exempt
 @require_http_methods(["POST"])
 def stop_playback_handler(data):
+    print("enter")
     return None
     # global stop_playback
     # stop_playback = True
