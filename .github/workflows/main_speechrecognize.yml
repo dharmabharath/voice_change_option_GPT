@@ -62,6 +62,16 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
+      - name: Install portaudio on Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'speechrecognize'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F7A4A4838632453BB4707E0186A16459 }}
+          inline-script: |
+            apt-get update
+            apt-get install -y portaudio19-dev
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
