@@ -54,6 +54,9 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     
     steps:
+      - name: Install portaudio development libraries
+        run: sudo apt update && sudo apt install portaudio19-dev -y
+          
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
@@ -62,11 +65,7 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install portaudio19-dev python3-pyaudio -y
-          pip install -r requirements.txt
+      
 
       
       - name: 'Deploy to Azure Web App'
