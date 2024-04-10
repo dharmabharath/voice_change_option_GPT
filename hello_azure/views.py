@@ -9,7 +9,7 @@ import wave
 import pyaudio
 
 stop_speech_synthesis = False
-speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
+speech_config = speechsdk.SpeechConfig(subscription="49a5b50e9b5d435eab3fbc6ffb1d11fe", region="eastus")
 file_name = "outputaudio.wav"
 audio_output_config = speechsdk.audio.AudioOutputConfig(filename=file_name)
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
@@ -59,7 +59,7 @@ def ask_openai(request):
             print("Erroe",e)
         if last_tts_request:
             last_tts_request.get()
-        # play_wav_file(file_name)
+        play_wav_file(file_name)
         return JsonResponse({'message': 'Speech synthesis completed'}, status=200)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
@@ -109,7 +109,7 @@ def play_wav_file(file_path):
 
 
 
-#after new response received the file to remove any existing data
+# after new response received the file to remove any existing data
 def empty_wav_file(file_path):
     with open(file_path, 'wb') as wf:
         wf.truncate()
@@ -120,10 +120,9 @@ def empty_wav_file(file_path):
 @csrf_exempt
 @require_http_methods(["POST"])
 def stop_playback_handler(data):
-    return None
-    # global stop_playback
-    # stop_playback = True
-    # return JsonResponse({'status': 'success'})
+    global stop_playback
+    stop_playback = True
+    return JsonResponse({'status': 'success'})
 
 
 # def stop_playback_handler():
