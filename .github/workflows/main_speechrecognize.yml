@@ -69,11 +69,6 @@ jobs:
         
       - name: List contents of the unzipped artifact
         run: ls -l
-      
-     
-
-      - name: List contents of the unzipped artifact
-        run: ls -l
 
       - name: Find portaudio19-dev files
         run: dpkg-query -L portaudio19-dev
