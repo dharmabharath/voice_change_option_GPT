@@ -59,7 +59,7 @@ jobs:
         with:
           name: python-app
 
- - name: Install system dependencies
+      - name: Install system dependencies
         run: |
           sudo apt update
           sudo apt-get install python3-dev portaudio19-dev
