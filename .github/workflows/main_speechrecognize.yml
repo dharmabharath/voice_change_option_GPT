@@ -63,8 +63,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt-get install portaudio19-dev
-          sudo apt-get install python3-pyaudio
+          sudo apt-get install -y portaudio19-dev python3-pyaudio
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
@@ -74,7 +73,12 @@ jobs:
 
       - name: Find portaudio19-dev files
         run: dpkg-query -L portaudio19-dev
-
+        
+      - name: Log installed packages
+        run: |
+          source venv/bin/activate
+          pip list > installed_packages.txt
+          
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
