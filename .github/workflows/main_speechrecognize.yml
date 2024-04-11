@@ -59,16 +59,18 @@ jobs:
         with:
           name: python-app
 
+ - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt-get install python3-dev portaudio19-dev
+
       - name: Unzip artifact for deployment
         run: unzip release.zip
         
       - name: List contents of the unzipped artifact
         run: ls -l
       
-      - name: Install system dependencies
-        run: |
-          sudo apt update
-          sudo apt-get install python3-dev portaudio19-dev
+     
 
       - name: List contents of the unzipped artifact
         run: ls -l
