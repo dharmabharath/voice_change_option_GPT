@@ -17,6 +17,7 @@ stop_playback = False
 
 def one(request):
     print("start")
+    
     return render(request,'index.html')
 
 @csrf_exempt
