@@ -4,5 +4,4 @@ whitenoise
 wheel
 openai
 azure-cognitiveservices-speech
-pyaudio
 SpeechRecognition
