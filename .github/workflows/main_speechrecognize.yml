@@ -29,9 +29,6 @@ jobs:
       
       - name: Install dependencies
         run: |
-          sudo apt update
-          sudo apt-get install portaudio19-dev
-          sudo apt-get install python3-pyaudio
           pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
@@ -60,24 +57,8 @@ jobs:
         with:
           name: python-app
 
-      - name: Install system dependencies
-        run: |
-          sudo apt update
-          sudo apt-get install -y portaudio19-dev python3-pyaudio
-
       - name: Unzip artifact for deployment
         run: unzip release.zip
-        
-      - name: List contents of the unzipped artifact
-        run: ls -l
-
-      - name: Find portaudio19-dev files
-        run: dpkg-query -L portaudio19-dev
-        
-      - name: Log installed packages
-        run: |
-          source venv/bin/activate
-          pip list > installed_packages.txt
           
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
