@@ -60,10 +60,31 @@ function startConverting() {
           send: ftr,
         },
         success: function (res) {
-          alert(res.message)
+          alert(res.message);
           console.log("Audio data:", res.message);
           const audioFileName = "outputaudio5.mp3";
-          const audioUrl = `/static/audio/${audioFileName}?t=${new Date().getTime()}`;
+          const audioUrl = `/static/audio/${audioFileName}?t=${new Date(
+            new Date().getTime()
+          ).toUTCString()}`;
+
+
+
+
+
+
+          console.log("audiourl", audioUrl, new Date().getTime());
+          const audioFile = "static/audio/outputaudio5.mp3";
+          const audioElement = document.createElement("audio");
+          audioElement.src = audioFile;
+          audioElement.addEventListener("loadedmetadata", function () {
+            const duration = audioElement.duration;
+            console.log("Duration:", duration, "seconds");
+          });
+
+
+
+
+
           audioUrlLink = audioUrl;
           playAudioAndRemoveAfterPlayback(audioUrl);
         },
@@ -103,8 +124,6 @@ function toggleSpeechSynthesis() {
   sendButton.style.visibility = "hidden";
 }
 
-
-
 // stop reading
 function Stop_Response() {
   // $.ajax({
@@ -122,8 +141,6 @@ function Stop_Response() {
   const audio = new Audio(audioUrlLink);
   audio.pause();
 }
-
-
 
 function playAudioAndRemoveAfterPlayback(audioUrl) {
   let audio = new Audio(audioUrl);
