@@ -29,7 +29,7 @@ stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="49a5b50e9b5d435eab3fbc6ffb1d11fe", region="eastus")
 
 
-audio_output_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
+audio_output_config = speechsdk.audio.AudioOutputConfig(stream=True)
 speech_config.speech_synthesis_voice_name='en-US-JennyMultilingualNeural'
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
 stop_playback = False
