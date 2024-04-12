@@ -5,11 +5,20 @@ import azure.cognitiveservices.speech as speechsdk
 from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
 from django.views.decorators.http import require_http_methods
+import os
+import uuid
+
+output_directory =r"static/audio"
+os.makedirs(output_directory, exist_ok=True)
 
 stop_speech_synthesis = False
-speech_config = speechsdk.SpeechConfig(subscription="d1cca89c7c0b4bb3ad3826708743a035", region="eastus")
-file_name = "outputaudio.wav"
-audio_output_config = speechsdk.audio.AudioOutputConfig(filename=file_name)
+speech_config = speechsdk.SpeechConfig(subscription="49a5b50e9b5d435eab3fbc6ffb1d11fe", region="eastus")
+file_name = "outputaudio5.mp3"
+full_file_path = os.path.join(output_directory, file_name)
+with open(full_file_path, 'wb'):
+    pass
+audio_output_config = speechsdk.audio.AudioOutputConfig(filename=full_file_path)
+speech_config.speech_synthesis_voice_name='en-US-JennyMultilingualNeural'
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
 stop_playback = False
 
@@ -21,6 +30,7 @@ def one(request):
 def ask_openai(request):
     global stop_playback
     stop_playback = False
+    audio_data_list = []
     print("saghd",request.POST['send'])
     if request.method=='POST':
         client = AzureOpenAI(
@@ -50,15 +60,16 @@ def ask_openai(request):
                             text = ''.join(collected_messages).strip() # join the recieved message together to build a sentence
                             if text != '' and stop_speech_synthesis!=True: # if sentence only have \n or space, we could skip
                                 print(f"Speech synthesized to speaker for: {text}")
-                                last_tts_request = speech_synthesizer.speak_text_async(text)  
-                                print("text",last_tts_request)                             
+                                # result = speech_synthesizer.speak_text(text)
+                                last_tts_request = speech_synthesizer.speak_text_async(text)                               
                                 collected_messages.clear()
                                 
         except Exception as e:
             print("Erroe",e)
         if last_tts_request:
             last_tts_request.get()
-        return JsonResponse({'message': 'Speech synthesis completed'}, status=200)
+        # print("setseteeste",audio_data_list)
+        return JsonResponse({'message':"success"}, status=200)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 

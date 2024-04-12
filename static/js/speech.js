@@ -5,8 +5,7 @@ var spr = new webkitSpeechRecognition() || SpeechRecognition();
 var sendButton;
 var r = document.getElementById("result");
 let without_speech = "";
-var audio=document.getElementById("myAudio")
-
+let audioUrlLink
 
 //start speech listening
 function startConverting() {
@@ -60,7 +59,13 @@ function startConverting() {
         data: {
           send: ftr,
         },
-
+        success: function (res) {
+          console.log("Audio data:", res);
+          const audioFileName = "outputaudio5.mp3";
+          const audioUrl = `/static/audio/${audioFileName}?t=${new Date().getTime()}`;
+          audioUrlLink = audioUrl;
+          playAudioAndRemoveAfterPlayback(audioUrl);
+        },
       });
       ftr = "";
       var sendButtons = document.getElementById("stop_Response");
@@ -70,6 +75,8 @@ function startConverting() {
     if (!without_speech) {
       console.log("ente condition");
       r.innerHTML = "No speech could be recognized";
+      const audio = new Audio("/static/images/outputaudio1.mp3");
+      audio.play();
       without_speech = "";
     } else {
       var resultbutton = document.getElementById("result");
@@ -78,7 +85,13 @@ function startConverting() {
   };
 }
 
-
+function handleAudioData(audioDataList) {
+  // Process the audio data (e.g., play it using Web Audio API)
+  audioDataList.message.forEach((audioData) => {
+    // Your code to process and play the audio data
+    console.log("Audio data:", audioData);
+  });
+}
 
 function toggleSpeechSynthesis() {
   without_speech = "nospeech";
@@ -90,18 +103,46 @@ function toggleSpeechSynthesis() {
 }
 
 
+
 // stop reading
 function Stop_Response() {
-  $.ajax({
-    type: "POST",
-    url: "/signal_stop_speech/", // This URL needs to be handled in your Django views.
-    data: {
-      stop_speech: true,
-    },
-    success: function (response) {
-      console.log("Requested to stop speech synthesis.");
-    },
-  });
+  // $.ajax({
+  //   type: "POST",
+  //   url: "/signal_stop_speech/", // This URL needs to be handled in your Django views.
+  //   data: {
+  //     stop_speech: true,
+  //   },
+  //   success: function (response) {
+  //     console.log("Requested to stop speech synthesis.");
+  //   },
+  // });
   var Stop_Response = document.getElementById("stop_Response");
   Stop_Response.style.visibility = "hidden";
+  const audio = new Audio(audioUrlLink);
+  audio.pause();
+}
+
+
+
+function playAudioAndRemoveAfterPlayback(audioUrl) {
+  let audio = new Audio(audioUrl);
+
+  function handlePlaybackEnd() {
+    var sendButtons = document.getElementById("stop_Response");
+    sendButtons.style.visibility = "hidden";
+    // Remove event listener
+    audio.removeEventListener("ended", handlePlaybackEnd);
+    console.log("audio", audio);
+
+    // Pause audio to ensure it's not playing anymore
+    audio.pause();
+
+    // Clear the src attribute to release the memory
+    audio.src = "";
+
+    // Nullify the reference to the audio element
+    // audio = null;
+  }
+  audio.play();
+  audio.addEventListener("ended", handlePlaybackEnd);
 }
