@@ -59,13 +59,13 @@ function startConverting() {
         data: {
           send: ftr,
         },
-        success: function (res) {
-          console.log("Audio data:", res);
-          const audioFileName = "outputaudio5.mp3";
-          const audioUrl = `/static/audio/${audioFileName}?t=${new Date().getTime()}`;
-          audioUrlLink = audioUrl;
-          playAudioAndRemoveAfterPlayback(audioUrl);
-        },
+        // success: function (res) {
+        //   console.log("Audio data:", res);
+        //   const audioFileName = "outputaudio5.mp3";
+        //   const audioUrl = `/static/audio/${audioFileName}?t=${new Date().getTime()}`;
+        //   audioUrlLink = audioUrl;
+        //   playAudioAndRemoveAfterPlayback(audioUrl);
+        // },
       });
       ftr = "";
       var sendButtons = document.getElementById("stop_Response");
