@@ -15,8 +15,7 @@ stop_speech_synthesis = False
 speech_config = speechsdk.SpeechConfig(subscription="49a5b50e9b5d435eab3fbc6ffb1d11fe", region="eastus")
 file_name = "outputaudio5.mp3"
 full_file_path = os.path.join(output_directory, file_name)
-with open(full_file_path, 'wb'):
-    pass
+
 audio_output_config = speechsdk.audio.AudioOutputConfig(filename=full_file_path)
 speech_config.speech_synthesis_voice_name='en-US-JennyMultilingualNeural'
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
@@ -47,8 +46,8 @@ def ask_openai(request):
             {"role": "user", "content": request.POST['send']}
         ])
         collected_messages = []
-        last_tts_request = None
-
+        last_tts_request = ""
+        last_tts_Response=None
         # iterate through the stream response stream
         try:
             for chunk in response:                
@@ -60,14 +59,18 @@ def ask_openai(request):
                             text = ''.join(collected_messages).strip() # join the recieved message together to build a sentence
                             if text != '' and stop_speech_synthesis!=True: # if sentence only have \n or space, we could skip
                                 print(f"Speech synthesized to speaker for: {text}")
+                                
                                 # result = speech_synthesizer.speak_text(text)
-                                last_tts_request = speech_synthesizer.speak_text_async(text)                               
+                                last_tts_request +=text
+                                
                                 collected_messages.clear()
+            last_tts_Response = speech_synthesizer.speak_text_async(last_tts_request) 
                                 
         except Exception as e:
             print("Erroe",e)
-        if last_tts_request:
-            last_tts_request.get()
+        if last_tts_Response:            
+            with open(full_file_path, 'wb') as file:
+                file.write(last_tts_Response.get().audio_data)
         # print("setseteeste",audio_data_list)
         return JsonResponse({'message':"success"}, status=200)
 
