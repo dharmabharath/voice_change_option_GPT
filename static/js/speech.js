@@ -60,7 +60,8 @@ function startConverting() {
           send: ftr,
         },
         success: function (res) {
-          console.log("Audio data:", res);
+          alert(res.message)
+          console.log("Audio data:", res.message);
           const audioFileName = "outputaudio5.mp3";
           const audioUrl = `/static/audio/${audioFileName}?t=${new Date().getTime()}`;
           audioUrlLink = audioUrl;
