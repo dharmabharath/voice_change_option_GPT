@@ -1,5 +1,8 @@
 Django
 requests
 whitenoise
+wheel
 openai
 azure-cognitiveservices-speech
+sounddevice
+soundfile
