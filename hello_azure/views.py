@@ -65,13 +65,13 @@ def ask_openai(request):
                                 last_tts_request +=text
                                 
                                 collected_messages.clear()
-            last_tts_Response = speech_synthesizer.speak_text_async(last_tts_request) 
+            # last_tts_Response = speech_synthesizer.speak_text_async(last_tts_request) 
                                 
         except Exception as e:
             print("Erroe",e)
-        if last_tts_Response:            
-            with open(full_file_path, 'wb') as file:
-                file.write(last_tts_Response.get().audio_data)
+        # if last_tts_Response:            
+        #     with open(full_file_path, 'wb') as file:
+        #         file.write(last_tts_Response.get().audio_data)
         print("ltts",type(last_tts_request))
         # print("setseteeste",audio_data_list)
         return JsonResponse({'message':last_tts_request}, status=200)
