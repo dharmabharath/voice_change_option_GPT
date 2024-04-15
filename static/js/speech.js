@@ -2,6 +2,7 @@ var ftr = "";
 
 var condition_to_stop_synthesis = false;
 var spr = new webkitSpeechRecognition() || SpeechRecognition();
+var synth = window.speechSynthesis; 
 var sendButton;
 var r = document.getElementById("result");
 let without_speech = "";
@@ -53,40 +54,45 @@ function startConverting() {
     console.log("Speech recognition stopped");
     console.log("ftr", ftr);
     if (ftr) {
+      console.log("ftrrrrrrrrrrrrrrrrr",ftr);
       $.ajax({
         type: "POST",
         url: "/audio_data/",
         data: {
           send: ftr,
         },
-        success: function (res) {
+        success: function (res) { 
           alert(res.message);
-          console.log("Audio data:", res.message);
-          const audioFileName = "outputaudio5.mp3";
-          const audioUrl = `/static/audio/${audioFileName}?t=${new Date(
-            new Date().getTime()
-          ).toUTCString()}`;
+          var utterance=new SpeechSynthesisUtterance(res.message)
+          synth.speak(utterance)
+
+          
+          // console.log("Audio data:", res.message);
+          // const audioFileName = "outputaudio5.mp3";
+          // const audioUrl = `/static/audio/${audioFileName}?t=${new Date(
+          //   new Date().getTime()
+          // ).toUTCString()}`;
 
 
 
 
 
 
-          console.log("audiourl", audioUrl, new Date().getTime());
-          const audioFile = "static/audio/outputaudio5.mp3";
-          const audioElement = document.createElement("audio");
-          audioElement.src = audioFile;
-          audioElement.addEventListener("loadedmetadata", function () {
-            const duration = audioElement.duration;
-            console.log("Duration:", duration, "seconds");
-          });
+          // console.log("audiourl", audioUrl, new Date().getTime());
+          // const audioFile = "static/audio/outputaudio5.mp3";
+          // const audioElement = document.createElement("audio");
+          // audioElement.src = audioFile;
+          // audioElement.addEventListener("loadedmetadata", function () {
+          //   const duration = audioElement.duration;
+          //   console.log("Duration:", duration, "seconds");
+          // });
 
 
 
 
 
-          audioUrlLink = audioUrl;
-          playAudioAndRemoveAfterPlayback(audioUrl);
+          // audioUrlLink = audioUrl;
+          // playAudioAndRemoveAfterPlayback(audioUrl);
         },
       });
       ftr = "";
