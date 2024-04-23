@@ -20,34 +20,19 @@
 </head>
 
 <body>
-  <!-- <div> -->
-  <!-- <button class="modes" onclick="changeTheme()">
-      <img src="../../static/images/brightness.png" alt="" id="bright">
-      <img src="../../static/images/night.png" alt="" id="dark">
-    </button> -->
-  <!-- <input type="checkbox" id="toggle">
-  <label for="toggle">
-    <i class="fa-solid fa-sun sun"></i>
-    <i class="fa-solid fa-moon moon"></i>
-  </label> -->
 
-
-
-
+  <input type="checkbox" class="checkbox" id="checkbox" onchange="changelogoQ(this.checked)">
+  <label for="checkbox" class="checkbox-label">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+    <span class="ball"></span>
+  </label>
 
   <div class="fullscreen">
-    <div class="themechng">
-      <input type="checkbox" class="checkbox" id="checkbox">
-      <label for="checkbox" class="checkbox-label">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-        <span class="ball"></span>
-      </label>
-    </div>
     <div class="firstheading">
       <div class="totallogo">
         <div class="quadralogo">
-          <img src="../../static/images/quadralogo.png" alt="" width="100px">
+          <img src="../../static/images/quadralogo.png" alt="" width="100px" id="logoquadra">
         </div>
         <div class="headinglabel">
           <text for="" class="mainhead">Welcome to Speech AI!</text>
@@ -111,12 +96,7 @@
     </div>
   </div>
 
-
   <img src="../../static/images/wave.png" alt="" class="imgwidth">
-
-
-
-
 
   <div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

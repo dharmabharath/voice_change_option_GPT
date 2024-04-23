@@ -216,18 +216,33 @@ function audiodetectionanimation(min,max,minmax){
     });
   }
 }
-let themeVariable="dark"
-function changeTheme(){
-  console.log("changetheme",themeVariable);
-  let getid=document.getElementById("styles")
-  if (themeVariable="dark"){
-    getid.href="{%static 'css/lightmode.css'%}";
-    themeVariable="light"
+
+
+function changelogoQ(checked){
+  let logoquadra=document.getElementById("logoquadra")
+
+  // console.log(checked);
+  if(checked){
+    logoquadra.src = "../../static/images/quadranlogo.png";
   }
   else{
-    getid.href="{%static 'css/darkmode.css'%}";
-    themeVariable="dark"
+    logoquadra.src = "../../static/images/quadralogo.png";
   }
-
-
+ 
 }
+
+$(document).ready(function(){
+  $(".checkbox").change(function(){
+    if($(this).is(":checked")) {
+      $("body").css("background-color", "#1E1E1E");
+      // $(".mainhead,.subhead,#nospeechlisten").css("color"," #fff");
+      // $(".wavelength").css("background"," #1E1E1E");
+      // $(".checkbox-label").css("background-color"," rgba(255, 255, 255, 0.28)");
+      // $(".imgwidth").css({"border":" #1E1E1E","z-index":"-7"});
+      // $(".textareafield").css({"border":" 1px solid rgb(62 157 252)"," background-color":"rgba(255, 255, 255, 0.28)"});
+    } else {
+      $("body").css("background-color", "");
+
+    }
+  });
+});
