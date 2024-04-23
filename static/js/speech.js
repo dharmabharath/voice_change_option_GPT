@@ -7,30 +7,64 @@ var sendButton;
 var r = document.getElementById("result");
 let without_speech = "";
 let audioUrlLink = "";
+let nospeechlisten=document.getElementById("nospeechlisten")
+let img = document.getElementById('imgwidhei');
+let speechenter=document.getElementById("speechenter")
+let reponseenter=document.getElementById("reponseenter")
+let inputbox=document.getElementById("responsecenter")
+let speechecenter=document.getElementById("speechecenter")
+nospeechlisten.style.visibility = "hidden";
+inputbox.style.visibility = "hidden";
+speechecenter.style.visibility = "hidden";
 
 //start speech listening
+
+function initial_call(event){
+  if (event=="Stop Responding"){
+    // console.log("Stop Responding",event)
+    Stop_Response()  
+  }
+  else if (event=="Tap to Speak"){
+
+    // console.log("Tap to Speak",event);
+    startConverting()
+   
+  }
+}
+
 function startConverting() {
+  inputbox.style.visibility="hidden"
+
+   
+  // console.log("eveents",event.srcElement.innerText);
+  nospeechlisten.style.visibility = "hidden";
   synth.cancel();
   ftr = "";
   // console.log("enter");
   without_speech = "";
   // console.log("enter log speech ", without_speech);
-  var sendButtons = document.getElementById("stop_Response");
-  sendButtons.style.visibility = "hidden";
+  // var sendButtons = document.getElementById("stop_Response");
+  // sendButtons.style.visibility = "hidden";
   var button = document.getElementById("re");
-  sendButton = document.getElementById("send");
+
+  // sendButton = document.getElementById("send");
+  
 
   button.disabled = true;
-  sendButton.style.visibility = "visible";
+  // sendButton.style.visibility = "visible";
 
   r.innerHTML = "Listening ......";
+  speechenter.innerHTML="..."
+  speechecenter.style.visibility="visible"
   spr.continuous = false; //True if continous conversion is needed, false to stop transalation when paused
   spr.interimResults = true;
   spr.lang = "en-IN"; // Set Input language
   spr.start(); //Start Recording the voice
-
+  // r.innerHTML = "Listening....";
+  audiodetectionanimation(0.9,0.2,0.4)
   // console.log("Start Recording the voice ");
   spr.onresult = function (event) {
+    speechenter.innerHTML="..."
     // console.log("contain voive");
 
     without_speech = "nospeech";
@@ -44,17 +78,23 @@ function startConverting() {
     }
 
     // console.log("interimTranscripts", interimTranscripts);
-    r.innerHTML = ftr + interimTranscripts;
+    // reponseenter.innerHTML=ftr+interimTranscripts
+    // r.innerHTML = ftr + interimTranscripts;
   };
   spr.onerror = function (event) {};
 
   spr.onend = function (event) {
+    speechenter.innerHTML=ftr
+    audiodetectionanimation(0,0,0)
     button.disabled = false;
-    var sendButtons = document.getElementById("send");
-    sendButtons.style.visibility = "hidden";
+    // var sendButtons = document.getElementById("send");
+    // sendButtons.style.visibility = "hidden";
     // console.log("Speech recognition stopped");
     // console.log("ftr", ftr);
     if (ftr) {
+      // img.style.visibility="hidden"
+      img.src = "../../static/images/rollinganimae.gif";
+      r.innerHTML = "Response Loading";
       // console.log("ftrrrrrrrrrrrrrrrrr", ftr);
       $.ajax({
         type: "POST",
@@ -62,59 +102,59 @@ function startConverting() {
         data: {
           send: ftr,
         },
+        
         success: function (res) {
+          inputbox.style.visibility="visible"
+          reponseenter.innerHTML=res.message;
+        
+          
           // alert(res.message);
           var utterance = new SpeechSynthesisUtterance(res.message);
-          synth.speak(utterance);
+          // console.log("utterance",utterance);
+          if (utterance){
+            img.src = "../../static/images/Stop.png";
+            img.style.visibility="visible"
+              r.innerHTML = "Stop Responding";
+            audiodetectionanimation(0.9,0.2,0.4)
+            synth.speak(utterance);
+          }
+
+        
           utterance.onend = function () {
-            var Stop_Response = document.getElementById("stop_Response");
-            Stop_Response.style.visibility = "hidden";
+            img.src = "../../static/images/micimage.png";
+            r.innerHTML = "Tap to Speak";
+            // var Stop_Response = document.getElementById("stop_Response");
+            // Stop_Response.style.visibility = "hidden";
+            audiodetectionanimation(0,0,0)
+          
           };
-
-          // console.log("Audio data:", res.message);
-          // const audioFileName = "outputaudio5.mp3";
-          // const audioUrl = `/static/audio/${audioFileName}?t=${new Date(
-          //   new Date().getTime()
-          // ).toUTCString()}`;
-
-          // console.log("audiourl", audioUrl, new Date().getTime());
-          // const audioFile = "static/audio/outputaudio5.mp3";
-          // const audioElement = document.createElement("audio");
-          // audioElement.src = audioFile;
-          // audioElement.addEventListener("loadedmetadata", function () {
-          //   const duration = audioElement.duration;
-          //   console.log("Duration:", duration, "seconds");
-          // });
-
-          // audioUrlLink = audioUrl;
-          // playAudioAndRemoveAfterPlayback(audioUrl);
+          
         },
       });
       ftr = "";
-      var sendButtons = document.getElementById("stop_Response");
-      sendButtons.style.visibility = "visible";
+      // var sendButtons = document.getElementById("stop_Response");
+      // sendButtons.style.visibility = "visible";
     }
     // console.log("without_speech", without_speech);
     if (!without_speech) {
       // console.log("ente condition");
-      r.innerHTML = "No speech could be recognized";
+      r.innerHTML = "Tap to Speak";
+      speechecenter.style.visibility="hidden"
+ 
+      nospeechlisten.style.visibility="visible"
       // const audio = new Audio("/static/images/outputaudio1.mp3");
       // audio.play();
       without_speech = "";
-    } else {
-      var resultbutton = document.getElementById("result");
-      resultbutton.style.visibility = "visible";
-    }
+    } 
+    // else {
+    //   var resultbutton = document.getElementById("result");
+    //   resultbutton.style.visibility = "visible";
+    // }
   };
 }
 
-function handleAudioData(audioDataList) {
-  // Process the audio data (e.g., play it using Web Audio API)
-  audioDataList.message.forEach((audioData) => {
-    // Your code to process and play the audio data
-    // console.log("Audio data:", audioData);
-  });
-}
+
+
 
 function toggleSpeechSynthesis() {
   without_speech = "nospeech";
@@ -122,34 +162,29 @@ function toggleSpeechSynthesis() {
 
   spr.stop();
 
-  sendButton.style.visibility = "hidden";
+  // sendButton.style.visibility = "hidden";
 }
+
+
+
 
 // stop reading
 function Stop_Response() {
-  // $.ajax({
-  //   type: "POST",
-  //   url: "/signal_stop_speech/", // This URL needs to be handled in your Django views.
-  //   data: {
-  //     stop_speech: true,
-  //   },
-  //   success: function (response) {
-  //     console.log("Requested to stop speech synthesis.");
-  //   },
-  // });
-  var Stop_Response = document.getElementById("stop_Response");
-  Stop_Response.style.visibility = "hidden";
   synth.cancel();
-  // const audio = new Audio(audioUrlLink);
-  // audio.pause();
+  audiodetectionanimation(0,0,0)
+  r.innerHTML = "Tap to Speak";
+  img.src = "../../static/images/micimage.png";
 }
+
+
+
 
 function playAudioAndRemoveAfterPlayback(audioUrl) {
   let audio = new Audio(audioUrl);
 
   function handlePlaybackEnd() {
-    var sendButtons = document.getElementById("stop_Response");
-    sendButtons.style.visibility = "hidden";
+    // var sendButtons = document.getElementById("stop_Response");
+    // sendButtons.style.visibility = "hidden";
     // Remove event listener
     audio.removeEventListener("ended", handlePlaybackEnd);
     // console.log("audio", audio);
@@ -165,4 +200,34 @@ function playAudioAndRemoveAfterPlayback(audioUrl) {
   }
   audio.play();
   audio.addEventListener("ended", handlePlaybackEnd);
+}
+
+
+
+
+function audiodetectionanimation(min,max,minmax){
+  // console.log(min,max,minmax);
+
+  const bar = document.querySelectorAll(".bar");
+  for (let i = 0; i < bar.length; i++) {
+    bar.forEach((item, j) => {
+      // Random move
+      item.style.animationDuration = `${Math.random() * (min - max) + minmax}s`; // 0.9   0.2   0.4 Change the numbers for speed / ( max - min ) + min / ex. ( 0.5 - 0.1 ) + 0.1
+    });
+  }
+}
+let themeVariable="dark"
+function changeTheme(){
+  console.log("changetheme",themeVariable);
+  let getid=document.getElementById("styles")
+  if (themeVariable="dark"){
+    getid.href="{%static 'css/lightmode.css'%}";
+    themeVariable="light"
+  }
+  else{
+    getid.href="{%static 'css/darkmode.css'%}";
+    themeVariable="dark"
+  }
+
+
 }

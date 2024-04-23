@@ -1,35 +1,127 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{%static 'css/index.css'%}">
-    <title>Document</title>
+
+  <link rel="stylesheet" href="{%static 'css/lightmode.css'%}" id="styles">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Speech AI</title>
+  <link rel="shortcut icon" href="../../static/images/quadraresponselogo.png" type="image/x-icon">
 </head>
+
 <body>
-  
-<div>
-    <div id='result' style="visibility: visible;">
-        <span class="sp">Ask Something ?</span>
-    </div>
-    <br>
-    <div id= 'record'>
-        <button onclick="startConverting()" class='btn btn-info btn-sm' id="re">ASK Question</button>
-        <button  onclick="toggleSpeechSynthesis()" class='btn btn-info btn-sm' value="Stop" id="send" style="visibility: hidden;">Stop Listening</button>
+  <!-- <div> -->
+  <!-- <button class="modes" onclick="changeTheme()">
+      <img src="../../static/images/brightness.png" alt="" id="bright">
+      <img src="../../static/images/night.png" alt="" id="dark">
+    </button> -->
+  <!-- <input type="checkbox" id="toggle">
+  <label for="toggle">
+    <i class="fa-solid fa-sun sun"></i>
+    <i class="fa-solid fa-moon moon"></i>
+  </label> -->
 
-       
-        <button  onclick="Stop_Response()" class='btn btn-info btn-sm' value="Stop" id="stop_Response" style="visibility: hidden;">Stop Response</button>
+
+
+
+
+  <div class="fullscreen">
+    <div class="themechng">
+      <input type="checkbox" class="checkbox" id="checkbox">
+      <label for="checkbox" class="checkbox-label">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+        <span class="ball"></span>
+      </label>
+    </div>
+    <div class="firstheading">
+      <div class="totallogo">
+        <div class="quadralogo">
+          <img src="../../static/images/quadralogo.png" alt="" width="100px">
+        </div>
+        <div class="headinglabel">
+          <text for="" class="mainhead">Welcome to Speech AI!</text>
+          <br>
+          <text class="subhead">
+            Tap the button and start speaking
+          </text>
+        </div>
+      </div>
+
+
+      <div class="wavelength">
+        <div class='sound-wave'>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+        </div>
+      </div>
+
+
+
+      <div class="buttonlocation">
+        <span id="nospeechlisten">No speech could be recognized</span>
+        <button onclick="initial_call(document.getElementById('result').textContent)" class='buttonmic' id="re">
+          <img src="../../static/images/micimage.png" alt="" id="imgwidhei">
+          <span id="result">Tap to Speak</span>
+        </button>
+      </div>
 
     </div>
-    <!-- <audio id="myAudio" controls>
-        <source src="../../outputaudio.wav" type="audio/wav">
-        Your browser does not support the audio element.
-      </audio> -->
+
+    <div class="inputbox">
+
+      <div class="textareafield">
+
+        <div id="speechecenter">
+          <img src="../../static/images/Userlogo.png" alt="" id="speechecenterimg">
+          <text id="speechenter"></text>
+        </div>
+        <div id="responsecenter">
+          <img src="../../static/images/quadraresponselogo.png" alt="" id="responsecenterimg">
+          <text id="reponseenter"></text>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <img src="../../static/images/wave.png" alt="" class="imgwidth">
+
+
+
+
+
+  <div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/speech.js' %}"></script>
   </div>
 </body>
+
 </html>
