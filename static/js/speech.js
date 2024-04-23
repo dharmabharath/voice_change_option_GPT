@@ -220,16 +220,18 @@ function audiodetectionanimation(min,max,minmax){
 
 function changelogoQ(checked){
   let logoquadra=document.getElementById("logoquadra")
-
+  let imgwidth=document.getElementById("imgwidth")
   // console.log(checked);
   if(checked){
+    imgwidth.src="../../static/images/wavenight.png";
     logoquadra.src = "../../static/images/quadranlogo.png";
   }
   else{
+    imgwidth.src="../../static/images/wave.png";
     logoquadra.src = "../../static/images/quadralogo.png";
-  }
- 
+  } 
 }
+
 
 $(document).ready(function(){
   $(".checkbox").change(function(){
