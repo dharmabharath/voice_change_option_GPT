@@ -36,7 +36,7 @@ body.dark {background-color: #292c35;} /* #9b59b6 */
 }
 
 .checkbox-label {
-  background-color: #194d8d;
+  background-color: #1970db;
   width: 50px;
   height: 26px;
   border-radius: 50px;
@@ -53,7 +53,10 @@ body.dark {background-color: #292c35;} /* #9b59b6 */
 
 .fa-moon {color: #f1c40f;}
 
-.fa-sun {color: #f39c12;}
+.fa-sun {    position: relative;
+    width: 18px;
+    height: 18px;
+    top: 2px;}
 
 .checkbox-label .ball {
   background-color: #fff;
@@ -87,9 +90,9 @@ body.dark {background-color: #292c35;} /* #9b59b6 */
         background:#1E1E1E;
     }
     .textareafield{
-        border: none;
+        border: 1px solid #1068d3;
         background-color: rgba(255, 255, 255, 0.28);
-        box-shadow: 0 6px 16px 0 rgb(58 122 147), 0 3px 0px -4px rgb(67 92 139), 0 9px 28px 8px rgb(65 92 123 / 39%);
+        box-shadow: 1px 1px 10px 0px rgb(22 69 125), 0 3px 0px -4px rgb(67 92 139), 0 9px 28px 8px rgb(65 92 123 / 39%);
     }
     #reponseenter, #speechenter{
         color: #FFF;
@@ -199,6 +202,7 @@ border: none;
 
 
 .textareafield {
+    padding: 15px;
     width: 459px;
     height: 459px;
     border: 1px solid rgb(206, 206, 206);
@@ -369,7 +373,7 @@ border: none;
 }
 
 
-@media  (min-width:1440px) {
+@media  (min-width:1280px){
     .textareafield{
         width: 640px;
         height: 640px;

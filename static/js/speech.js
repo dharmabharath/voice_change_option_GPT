@@ -237,6 +237,7 @@ $(document).ready(function(){
   $(".checkbox").change(function(){
     if($(this).is(":checked")) {
       $("body").css("background-color", "#1E1E1E");
+      $(".checkbox-label").css("background-color", "#606871");
       // $(".mainhead,.subhead,#nospeechlisten").css("color"," #fff");
       // $(".wavelength").css("background"," #1E1E1E");
       // $(".checkbox-label").css("background-color"," rgba(255, 255, 255, 0.28)");
@@ -244,6 +245,7 @@ $(document).ready(function(){
       // $(".textareafield").css({"border":" 1px solid rgb(62 157 252)"," background-color":"rgba(255, 255, 255, 0.28)"});
     } else {
       $("body").css("background-color", "");
+      $(".checkbox-label").css("background-color", "#1970db");
 
     }
   });
