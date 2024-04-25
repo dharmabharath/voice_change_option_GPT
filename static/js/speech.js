@@ -13,6 +13,7 @@ let speechenter=document.getElementById("speechenter")
 let reponseenter=document.getElementById("reponseenter")
 let inputbox=document.getElementById("responsecenter")
 let speechecenter=document.getElementById("speechecenter")
+let nightmodelogo=document.getElementById("responsecenterimg")
 nospeechlisten.style.visibility = "hidden";
 inputbox.style.visibility = "hidden";
 speechecenter.style.visibility = "hidden";
@@ -223,10 +224,12 @@ function changelogoQ(checked){
   let imgwidth=document.getElementById("imgwidth")
   // console.log(checked);
   if(checked){
+    nightmodelogo.src="../../static/images/quadranightlogo.png";
     imgwidth.src="../../static/images/wavenight.png";
     logoquadra.src = "../../static/images/quadranlogo.png";
   }
   else{
+    nightmodelogo.src="../../static/images/quadraresponselogo.png";
     imgwidth.src="../../static/images/wave.png";
     logoquadra.src = "../../static/images/quadralogo.png";
   } 
