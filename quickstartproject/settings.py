@@ -25,7 +25,7 @@ SECRET_KEY = '1234567890'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['speechrecognize.azurewebsites.net']
+ALLOWED_HOSTS = ['speechrecognizeai.azurewebsites.net']
 
 # DEBUG = True
 # ALLOWED_HOSTS = []
