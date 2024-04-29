@@ -66,6 +66,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'speechrecognize'
+          app-name: 'speechrecognizeai'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F7A4A4838632453BB4707E0186A16459 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_033E20DFFB804E5DB58EB737E9097B75 }}
