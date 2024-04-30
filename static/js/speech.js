@@ -14,9 +14,6 @@ let reponseenter=document.getElementById("reponseenter")
 let inputbox=document.getElementById("responsecenter")
 let speechecenter=document.getElementById("speechecenter")
 let nightmodelogo=document.getElementById("responsecenterimg")
-var utterance = new SpeechSynthesisUtterance();
-
-let voicevalue=125;
 nospeechlisten.style.visibility = "hidden";
 inputbox.style.visibility = "hidden";
 speechecenter.style.visibility = "hidden";
@@ -110,11 +107,10 @@ function startConverting() {
         success: function (res) {
           inputbox.style.visibility="visible"
           reponseenter.innerHTML=res.message;
-          let voices = window.speechSynthesis.getVoices();
-          // console.log(voices);
+        
+          
           // alert(res.message);
-          utterance.voice=voices[voicevalue]
-          utterance.text=res.message
+          var utterance = new SpeechSynthesisUtterance(res.message);
           // console.log("utterance",utterance);
           if (utterance){
             img.src = "../../static/images/Stop.png";
@@ -222,31 +218,21 @@ function audiodetectionanimation(min,max,minmax){
   }
 }
 
-let changevoice=true;
+
 function changelogoQ(checked){
   let logoquadra=document.getElementById("logoquadra")
   let imgwidth=document.getElementById("imgwidth")
   // console.log(checked);
-  if(checked==true){
+  if(checked){
     nightmodelogo.src="../../static/images/quadranightlogo.png";
     imgwidth.src="../../static/images/wavenight.png";
     logoquadra.src = "../../static/images/quadranlogo.png";
   }
-  else if (checked==false){
+  else{
     nightmodelogo.src="../../static/images/quadraresponselogo.png";
     imgwidth.src="../../static/images/wave.png";
     logoquadra.src = "../../static/images/quadralogo.png";
   } 
-  else if (checked=="voicechange") {
-    changevoice=!changevoice
-    // console.log(changevoice);
-    if (changevoice==true){
-      voicevalue=125;
-    }
-    else{
-      voicevalue=127;
-    }
-  }
 }
 
 
