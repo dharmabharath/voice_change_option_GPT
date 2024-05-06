@@ -149,7 +149,7 @@ body {
 
 
 .chatbox {
-    max-height: 407px;
+   height: 407px;
     overflow: hidden;
     list-style-type: none;
     padding: 0;
@@ -284,7 +284,7 @@ body {
     font-size: 12px;
     }
     .chatbox {
-        height: 626px;
+        height: 635px;
         width: 1244px;
         left: 346px;
     }
@@ -295,6 +295,11 @@ body {
     .robotimg img{
         right: 18px;
         position: relative;
+    }
+}
+@media screen and (min-width:1400px) and (max-width:1599px){
+    .chatbox {
+        height: 531px;
     }
 }
 /* .scroll-indicator {
