@@ -34,6 +34,8 @@ body {
 .centertitle {
     display: flex;
     flex-direction: column;
+    position: relative;
+    left: 110px;
 }
 
 .robotimg img {
@@ -147,11 +149,16 @@ body {
 
 
 .chatbox {
-    height: 407px;
-    overflow: auto;
+    max-height: 407px;
+    overflow: hidden;
     list-style-type: none;
     padding: 0;
     margin: 0;
+    width: 900px;
+    align-items: center;
+    position: relative;
+    left: 188px;
+
 }
 
 /* Style for incoming chat message */
@@ -206,10 +213,25 @@ body {
 .chat.outgoing p {
     background-color: rgba(255, 255, 255, 1);
     color: black;
+    /* animation: appear 0.2s forwards; */
 }
+
 .robotimg{
     animation: shake 3s infinite;
+    position: relative;
+    right: 60px;
 }
+@keyframes appear {
+    from {
+        opacity: 0; /* Start with opacity 0 */
+        transform: translateY(50px); /* Move letters down */
+    }
+    to {
+        opacity: 1; /* End with opacity 1 */
+        transform: translateY(0); /* Reset transform */
+    }
+}
+
 @keyframes shake{
 0%,100%{
     transform: translateY(0px);
@@ -262,5 +284,37 @@ body {
     font-size: 12px;
     }
     .chatbox {
-        height: 626px;}
+        height: 626px;
+        width: 1244px;
+        left: 346px;
+    }
+    .centertitle{
+        left: 137px;
+    }
+
+    .robotimg img{
+        right: 18px;
+        position: relative;
+    }
 }
+/* .scroll-indicator {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #888; 
+    cursor: pointer;
+} */
+
+
+
+
+
+
+
+
+
+

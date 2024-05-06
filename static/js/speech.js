@@ -19,13 +19,17 @@ const createchatli = (message, className) => {
   if (className == "incoming") {
     const chatli = document.createElement("li"); // Use createElement instead of createDocumentFragment
     chatli.classList.add("chat", className);
+    chatli.id="incoming";
     let chatcontent =
       className == "outgoing"
         ? `<p>${message}</p>`
         : ` <img src="../../static/images/User-60.png" alt="" id="speechecenterimg" class="speechecenterimg"><p>${message}</p>`;
     chatli.innerHTML = chatcontent;
+    
+   
     return chatli;
-  } else if (className == "outgoing") {
+  } 
+  else if (className == "outgoing") {
     const chatli = document.createElement("li"); // Use createElement instead of createDocumentFragment
     chatli.classList.add("chat", className);
     let chatcontent =
@@ -33,6 +37,8 @@ const createchatli = (message, className) => {
         ? `<p>${message}</p>`
         : ` <img src="../../static/images/chatrobo.png" alt="" id="speechecenterimg" class="speechecenterimg"><p>${message}</p>`;
     chatli.innerHTML = chatcontent;
+    
+    // document.getElementById("chat-bar-bottom").scrollIntoView(true);
     return chatli;
   }
 };
@@ -67,7 +73,7 @@ function startConverting() {
 
   spr.onresult = function (event) {
     firstSpeechrecog=true;
-    console.log(firstSpeechrecog);
+    // console.log(firstSpeechrecog);
     without_speech = "nospeech";
     var interimTranscripts = "";
     for (var i = event.resultIndex; i < event.results.length; i++) {
@@ -89,7 +95,9 @@ function startConverting() {
       sline.src = "../../static/images/Line.png";
       centerpart.style.display = "none";
       inputbox.style.display = "flex";
-      chatbox.appendChild(createchatli(ftr, "incoming"));
+      const lastMessage = chatbox.lastElementChild;
+      chatbox.insertBefore(createchatli(ftr, "incoming"),lastMessage);
+      document.getElementById("chat-bar-bottom").scrollIntoView(true);
       if (ftr) {
         $.ajax({
           type: "POST",
@@ -99,10 +107,11 @@ function startConverting() {
           },
 
           success: function (res) {
-            console.log("wait");
-            chatbox.appendChild(createchatli(res.message, "outgoing"));
+            const lastMessage = chatbox.lastElementChild;
+            chatbox.insertBefore(createchatli(res.message, "outgoing"),lastMessage);
+            document.getElementById("chat-bar-bottom").scrollIntoView(true);
             var utterance = new SpeechSynthesisUtterance(res.message);
-            speakimg.src = "../../static/images/stop 1.png";
+            speakimg.src = "../../static/images/stop1.png";
             r.innerHTML = "Stop Responding";
             speakimg;
             if (utterance) {
@@ -240,3 +249,25 @@ $(document).ready(function () {
     }
   });
 });
+
+
+
+function scrollToBottom() {
+  var chatbox = document.getElementById('chatbox');
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+// Event listener for scroll indicator
+document.getElementById('chatbox').addEventListener('wheel', function(event) {
+  // Check if scrolling down
+  if (event.deltaY > 0) {
+    // Scroll down
+    chatbox.scrollTop += 50; // Increase or decrease the scroll speed as needed
+} else {
+    // Scroll up
+    chatbox.scrollTop -= 50; // Increase or decrease the scroll speed as needed
+}
+});
+
+// Call scrollToBottom function initially to scroll to the bottom
+scrollToBottom();
