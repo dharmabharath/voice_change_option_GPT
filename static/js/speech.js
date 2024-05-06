@@ -4,70 +4,70 @@ var condition_to_stop_synthesis = false;
 var spr = new webkitSpeechRecognition() || SpeechRecognition();
 var synth = window.speechSynthesis;
 var sendButton;
-var r = document.getElementById("result");
 let without_speech = "";
-let audioUrlLink = "";
-let nospeechlisten=document.getElementById("nospeechlisten")
-let img = document.getElementById('imgwidhei');
-let speechenter=document.getElementById("speechenter")
-let reponseenter=document.getElementById("reponseenter")
-let inputbox=document.getElementById("responsecenter")
-let speechecenter=document.getElementById("speechecenter")
-let nightmodelogo=document.getElementById("responsecenterimg")
-nospeechlisten.style.visibility = "hidden";
-inputbox.style.visibility = "hidden";
-speechecenter.style.visibility = "hidden";
+const chatbox = document.querySelector(".chatbox");
+const centerpart = document.getElementById("centerpart");
+var r = document.getElementById("result");
+const inputbox = document.getElementById("inputbox");
+const fline = document.getElementById("fline");
+const sline = document.getElementById("sline");
+const speakimg = document.getElementById("speakimg");
+let firstSpeechrecog = false;
+inputbox.style.display = "none";
+
+const createchatli = (message, className) => {
+  if (className == "incoming") {
+    const chatli = document.createElement("li"); // Use createElement instead of createDocumentFragment
+    chatli.classList.add("chat", className);
+    let chatcontent =
+      className == "outgoing"
+        ? `<p>${message}</p>`
+        : ` <img src="../../static/images/User-60.png" alt="" id="speechecenterimg" class="speechecenterimg"><p>${message}</p>`;
+    chatli.innerHTML = chatcontent;
+    return chatli;
+  } else if (className == "outgoing") {
+    const chatli = document.createElement("li"); // Use createElement instead of createDocumentFragment
+    chatli.classList.add("chat", className);
+    let chatcontent =
+      className == "incoming"
+        ? `<p>${message}</p>`
+        : ` <img src="../../static/images/chatrobo.png" alt="" id="speechecenterimg" class="speechecenterimg"><p>${message}</p>`;
+    chatli.innerHTML = chatcontent;
+    return chatli;
+  }
+};
 
 //start speech listening
-
-function initial_call(event){
-  if (event=="Stop Responding"){
+function initial_call(event) {
+  if (event == "Stop Responding") {
     // console.log("Stop Responding",event)
-    Stop_Response()  
-  }
-  else if (event=="Tap to Speak"){
-
+    Stop_Response();
+  } else if (event == "Tap the button to speak") {
     // console.log("Tap to Speak",event);
-    startConverting()
-   
+    startConverting();
   }
 }
 
 function startConverting() {
-  inputbox.style.visibility="hidden"
-
-   
-  // console.log("eveents",event.srcElement.innerText);
-  nospeechlisten.style.visibility = "hidden";
+  fline.style.height = "100px";
+  fline.src = "../../static/images/soundwave.gif";
+  sline.style.height = "100px";
+  sline.src = "../../static/images/soundwave.gif";
   synth.cancel();
   ftr = "";
   // console.log("enter");
   without_speech = "";
-  // console.log("enter log speech ", without_speech);
-  // var sendButtons = document.getElementById("stop_Response");
-  // sendButtons.style.visibility = "hidden";
+
   var button = document.getElementById("re");
 
-  // sendButton = document.getElementById("send");
-  
-
-  button.disabled = true;
-  // sendButton.style.visibility = "visible";
-
-  r.innerHTML = "Listening ......";
-  speechenter.innerHTML="..."
-  speechecenter.style.visibility="visible"
   spr.continuous = false; //True if continous conversion is needed, false to stop transalation when paused
   spr.interimResults = true;
   spr.lang = "en-IN"; // Set Input language
   spr.start(); //Start Recording the voice
-  // r.innerHTML = "Listening....";
-  audiodetectionanimation(0.9,0.2,0.4)
-  // console.log("Start Recording the voice ");
-  spr.onresult = function (event) {
-    speechenter.innerHTML="..."
-    // console.log("contain voive");
 
+  spr.onresult = function (event) {
+    firstSpeechrecog=true;
+    console.log(firstSpeechrecog);
     without_speech = "nospeech";
     var interimTranscripts = "";
     for (var i = event.resultIndex; i < event.results.length; i++) {
@@ -77,85 +77,81 @@ function startConverting() {
         ftr += transcript;
       } else interimTranscripts += transcript;
     }
-
-    // console.log("interimTranscripts", interimTranscripts);
-    // reponseenter.innerHTML=ftr+interimTranscripts
-    // r.innerHTML = ftr + interimTranscripts;
+  secondpage()
   };
   spr.onerror = function (event) {};
+  function secondpage(){
+    spr.onend = function (event) {
+      
+      fline.style.height = "1px";
+      fline.src = "../../static/images/Line.png";
+      sline.style.height = "1px";
+      sline.src = "../../static/images/Line.png";
+      centerpart.style.display = "none";
+      inputbox.style.display = "flex";
+      chatbox.appendChild(createchatli(ftr, "incoming"));
+      if (ftr) {
+        $.ajax({
+          type: "POST",
+          url: "/audio_data/",
+          data: {
+            send: ftr,
+          },
 
-  spr.onend = function (event) {
-    speechenter.innerHTML=ftr
-    audiodetectionanimation(0,0,0)
-    button.disabled = false;
-    // var sendButtons = document.getElementById("send");
-    // sendButtons.style.visibility = "hidden";
-    // console.log("Speech recognition stopped");
-    // console.log("ftr", ftr);
-    if (ftr) {
-      // img.style.visibility="hidden"
-      img.src = "../../static/images/rollinganimae.gif";
-      r.innerHTML = "Response Loading";
-      // console.log("ftrrrrrrrrrrrrrrrrr", ftr);
-      $.ajax({
-        type: "POST",
-        url: "/audio_data/",
-        data: {
-          send: ftr,
-        },
-        
-        success: function (res) {
-          inputbox.style.visibility="visible"
-          reponseenter.innerHTML=res.message;
-        
-          
-          // alert(res.message);
-          var utterance = new SpeechSynthesisUtterance(res.message);
-          // console.log("utterance",utterance);
-          if (utterance){
-            img.src = "../../static/images/Stop.png";
-            img.style.visibility="visible"
-              r.innerHTML = "Stop Responding";
-            audiodetectionanimation(0.9,0.2,0.4)
-            synth.speak(utterance);
-          }
+          success: function (res) {
+            console.log("wait");
+            chatbox.appendChild(createchatli(res.message, "outgoing"));
+            var utterance = new SpeechSynthesisUtterance(res.message);
+            speakimg.src = "../../static/images/stop 1.png";
+            r.innerHTML = "Stop Responding";
+            speakimg;
+            if (utterance) {
+              fline.style.height = "100px";
+              fline.src = "../../static/images/soundwave.gif";
+              sline.style.height = "100px";
+              sline.src = "../../static/images/soundwave.gif";
 
-        
-          utterance.onend = function () {
-            img.src = "../../static/images/micimage.png";
-            r.innerHTML = "Tap to Speak";
-            // var Stop_Response = document.getElementById("stop_Response");
-            // Stop_Response.style.visibility = "hidden";
-            audiodetectionanimation(0,0,0)
-          
-          };
-          
-        },
-      });
-      ftr = "";
-      // var sendButtons = document.getElementById("stop_Response");
-      // sendButtons.style.visibility = "visible";
-    }
-    // console.log("without_speech", without_speech);
-    if (!without_speech) {
-      // console.log("ente condition");
-      r.innerHTML = "Tap to Speak";
-      speechecenter.style.visibility="hidden"
- 
-      nospeechlisten.style.visibility="visible"
-      // const audio = new Audio("/static/images/outputaudio1.mp3");
-      // audio.play();
-      without_speech = "";
-    } 
-    // else {
-    //   var resultbutton = document.getElementById("result");
-    //   resultbutton.style.visibility = "visible";
-    // }
-  };
+              synth.speak(utterance);
+            }
+            utterance.onend = function () {
+              r.innerHTML = "Tap the button to speak";
+              fline.style.height = "1px";
+              fline.src = "../../static/images/Line.png";
+              sline.style.height = "1px";
+              sline.src = "../../static/images/Line.png";
+              speakimg.src = "../../static/images/newmic.png";
+            };
+          },
+        });
+        ftr = "";
+        // var sendButtons = document.getElementById("stop_Response");
+        // sendButtons.style.visibility = "visible";
+      }
+      // console.log("without_speech", without_speech);
+      if (!without_speech) {
+        // console.log("ente condition");
+
+        // speechecenter.style.visibility="hidden"
+
+        nospeechlisten.style.visibility = "visible";
+        // const audio = new Audio("/static/images/outputaudio1.mp3");
+        // audio.play();
+        without_speech = "";
+      }
+      // else {
+      //   var resultbutton = document.getElementById("result");
+      //   resultbutton.style.visibility = "visible";
+      // }
+    };
+  }
+  
+  spr.onend=function(){
+    fline.style.height = "1px";
+    fline.src = "../../static/images/Line.png";
+    sline.style.height = "1px";
+    sline.src = "../../static/images/Line.png";
+  }
 }
-
-
-
 
 function toggleSpeechSynthesis() {
   without_speech = "nospeech";
@@ -166,19 +162,17 @@ function toggleSpeechSynthesis() {
   // sendButton.style.visibility = "hidden";
 }
 
-
-
-
 // stop reading
 function Stop_Response() {
   synth.cancel();
-  audiodetectionanimation(0,0,0)
-  r.innerHTML = "Tap to Speak";
-  img.src = "../../static/images/micimage.png";
+  speakimg.src = "../../static/images/newmic.png";
+  r.innerHTML = "Tap the button to speak";
+  fline.style.height = "1px";
+  fline.src = "../../static/images/Line.png";
+  sline.style.height = "1px";
+  sline.src = "../../static/images/Line.png";
+  speakimg.src = "../../static/images/newmic.png";
 }
-
-
-
 
 function playAudioAndRemoveAfterPlayback(audioUrl) {
   let audio = new Audio(audioUrl);
@@ -203,10 +197,7 @@ function playAudioAndRemoveAfterPlayback(audioUrl) {
   audio.addEventListener("ended", handlePlaybackEnd);
 }
 
-
-
-
-function audiodetectionanimation(min,max,minmax){
+function audiodetectionanimation(min, max, minmax) {
   // console.log(min,max,minmax);
 
   const bar = document.querySelectorAll(".bar");
@@ -218,27 +209,24 @@ function audiodetectionanimation(min,max,minmax){
   }
 }
 
-
-function changelogoQ(checked){
-  let logoquadra=document.getElementById("logoquadra")
-  let imgwidth=document.getElementById("imgwidth")
+function changelogoQ(checked) {
+  let logoquadra = document.getElementById("logoquadra");
+  let imgwidth = document.getElementById("imgwidth");
   // console.log(checked);
-  if(checked){
-    nightmodelogo.src="../../static/images/quadranightlogo.png";
-    imgwidth.src="../../static/images/wavenight.png";
+  if (checked) {
+    nightmodelogo.src = "../../static/images/quadranightlogo.png";
+    imgwidth.src = "../../static/images/wavenight.png";
     logoquadra.src = "../../static/images/quadranlogo.png";
-  }
-  else{
-    nightmodelogo.src="../../static/images/quadraresponselogo.png";
-    imgwidth.src="../../static/images/wave.png";
+  } else {
+    nightmodelogo.src = "../../static/images/quadraresponselogo.png";
+    imgwidth.src = "../../static/images/wave.png";
     logoquadra.src = "../../static/images/quadralogo.png";
-  } 
+  }
 }
 
-
-$(document).ready(function(){
-  $(".checkbox").change(function(){
-    if($(this).is(":checked")) {
+$(document).ready(function () {
+  $(".checkbox").change(function () {
+    if ($(this).is(":checked")) {
       $("body").css("background-color", "#1E1E1E");
       $(".checkbox-label").css("background-color", "#606871");
       // $(".mainhead,.subhead,#nospeechlisten").css("color"," #fff");
@@ -249,7 +237,6 @@ $(document).ready(function(){
     } else {
       $("body").css("background-color", "");
       $(".checkbox-label").css("background-color", "#1970db");
-
     }
   });
 });

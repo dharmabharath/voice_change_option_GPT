@@ -20,16 +20,16 @@ full_file_path = os.path.join(output_directory, file_name)
 audio_output_config = speechsdk.audio.AudioOutputConfig(filename=full_file_path)
 speech_config.speech_synthesis_voice_name='en-US-JennyMultilingualNeural'
 speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_output_config)
-stop_playback = False
-
+storeHistory=[]
 @csrf_exempt
 def one(request):
-    print("start")
-    return render(request,'index.html')
+    global storeHistory
+    context={'storeHistory': storeHistory}
+    # storeHistory=[]
+    print(storeHistory)
+    return render(request,'index.html',context)
 @csrf_exempt
 def ask_openai(request):
-    global stop_playback
-    stop_playback = False
     audio_data_list = []
     print("saghd",request.POST['send'])
     if request.method=='POST':
@@ -46,6 +46,7 @@ def ask_openai(request):
         response = client.chat.completions.create(model=deployment_id, max_tokens=200, stream=True, messages=[
             {"role": "user", "content": request.POST['send']}
         ])
+        
         collected_messages = []
         last_tts_request = ""
         last_tts_Response=None
@@ -64,17 +65,18 @@ def ask_openai(request):
                                 # result = speech_synthesizer.speak_text(text)
                                 last_tts_request +=text
                                 
+                                
                                 collected_messages.clear()
+            # storeHistory.append({"user":request.POST['send'],"assistant":last_tts_request})
             # last_tts_Response = speech_synthesizer.speak_text_async(last_tts_request) 
+            
+        
                                 
         except Exception as e:
             print("Erroe",e)
-        # if last_tts_Response:            
-        #     with open(full_file_path, 'wb') as file:
-        #         file.write(last_tts_Response.get().audio_data)
-        print("ltts",type(last_tts_request))
-        # print("setseteeste",audio_data_list)
-        return JsonResponse({'message':last_tts_request}, status=200)
+        # print("ltts",type(last_tts_request))
+        print("storeHistory",storeHistory)
+        return JsonResponse({'message':last_tts_request,"storedata":storeHistory}, status=200)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
@@ -89,48 +91,6 @@ def signal_stop_speech(request):
             speech_synthesizer.stop_speaking_async()
             stop_speech_synthesis = False
             return JsonResponse({'status': 'success'}) 
-
-
-
-
-
-
-# def play_wav_file(file_path):
-#     global stop_playback
-#     s=file_path
-#     chunk = 1024
-#     wf = wave.open(file_path, 'rb')
-#     p = pyaudio.PyAudio()
-
-#     # Open stream
-#     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-#                     channels=wf.getnchannels(),
-#                     rate=wf.getframerate(),
-#                     output=True)
-
-#     # Read data
-#     data = wf.readframes(chunk)
-
-#     # Play stream
-#     while data and not stop_playback:
-#         stream.write(data)
-#         data = wf.readframes(chunk)
-
-#     # Stop stream
-#     stream.stop_stream()
-#     stream.close()
-
-#     # Close PyAudio
-#     p.terminate()
-#     empty_wav_file(s)
-
-
-
-# #after new response received the file to remove any existing data
-# def empty_wav_file(file_path):
-#     with open(file_path, 'wb') as wf:
-#         wf.truncate()
-
 
 
 @csrf_exempt

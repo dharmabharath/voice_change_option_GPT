@@ -3,116 +3,81 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-  <link rel="stylesheet" href="{%static 'css/lightmode.css'%}" id="styles">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Speech AI</title>
-  <link rel="shortcut icon" href="../../static/images/quadraresponselogo2.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/lightmode.css'%}" id="styles">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Speech AI</title>
+    <link rel="shortcut icon" href="../../static/images/quadraresponselogo2.png" type="image/x-icon">
 </head>
 
 <body>
-  <div>
-    <input type="checkbox" class="checkbox" id="checkbox" onchange="changelogoQ(this.checked)">
-    <label for="checkbox" class="checkbox-label">
-      <i class="fas fa-moon"></i>
-      <i><img src="../../static/images/brightness.png" alt="" class="fa-sun"></i>
-      <span class="ball"></span>
-    </label>
-    <!-- <input type="checkbox" class="checkbox2" id="checkbox2" onchange="changelogoQ('voicechange')">
-    <label for="checkbox2" class="checkbox-label2">
-      <i><img src="../../static/images/man-user.png" alt="" class="fa-sun2"></i>
-      <i><img src="../../static/images/woman-avatar.png" alt="" class="fa-sun2"></i>
-      <span class="ball2"><img src="../../static/images/volume.png" alt="" class="volumeimg"></span>
-    </label> -->
+    <div class="mainclass">
 
-    <div class="fullscreen">
-      <div class="firstheading">
-        <div class="totallogo">
-          <div class="quadralogo">
-            <img src="../../static/images/quadralogo.png" alt="" width="100px" id="logoquadra">
-          </div>
-          <div class="headinglabel">
-            <text for="" class="mainhead">Welcome to Speech AI!</text>
-            <br>
-            <text class="subhead">
-              Tap the button and start speaking
-            </text>
-          </div>
+        <div class="headerpart">
+            <div class="voicegptimg">
+                <img src="../../../static/images/voicegpt.png" alt="">
+            </div>
+            <div class="quadralogoimg">
+                <img src="../../../static/images/quadralogo.png" alt="">
+            </div>
+        </div>
+        <div class="stflexcolor">
+            <div class="inputbox" id="inputbox">
+                <div class="textareafield">
+                    <ul class="chatbox">
+                        <!-- <li class="chat incoming">
+                            <img src="../../static/images/User-60.png" alt="" id="speechecenterimg" class="speechecenterimg">
+                                <p></p>
+                           
+                        </li>
+                        <li class="chat outgoing">
+                            <img src="../../static/images/chatrobo.png" alt="" id="speechecenterimg" class="speechecenterimg">
+                                <p></p>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="centerpart" id="centerpart">
+                <div class="centertitle">
+
+                    <p class="miniheader">Hello!</p>
+                    <text class="largeheader">How Can I Assist You?</text>
+
+                </div>
+                <div class="robotimg">
+                    <img src="../../../static/images/robotimg.png" alt="">
+                </div>
+            </div>
+            <div class="footerpart">
+                <div class="taptext">
+                    <p id="result">Tap the button to speak</p>
+                </div>
+                <div class="fooetrmicandwaves">
+                    <div class="fline" >
+                        <img src="../../../static/images/Line.png" alt="" id="fline">
+                    </div>
+                    <div class="micimg">
+                        <img src="../../../static/images/newmic.png" alt="" onclick="initial_call(document.getElementById('result').textContent)" id="speakimg">
+                    </div>
+                    <div class="sline" >
+                        <img src="../../../static/images/Line.png" alt="" id="sline">
+                    </div>
+                </div>
+            </div>
         </div>
 
-
-        <div class="wavelength">
-          <div class='sound-wave'>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-            <div class='bar'></div>
-          </div>
-        </div>
-
-
-
-        <div class="buttonlocation">
-          <span id="nospeechlisten">No speech could be recognized</span>
-          <button onclick="initial_call(document.getElementById('result').textContent)" class='buttonmic' id="re">
-            <img src="../../static/images/micimage.png" alt="" id="imgwidhei">
-            <span id="result">Tap to Speak</span>
-          </button>
-        </div>
-
-      </div>
-
-      <div class="inputbox">
-
-        <div class="textareafield">
-
-          <div id="speechecenter">
-            <img src="../../static/images/Userlogo.png" alt="" id="speechecenterimg">
-            <text id="speechenter"></text>
-          </div>
-          <div id="responsecenter">
-            <img src="../../static/images/quadraresponselogo.png" alt="" id="responsecenterimg">
-            <text id="reponseenter"></text>
-
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-
-
-  <div class="bottomimg">  
-    <img src="../../static/images/wave.png" alt="" class="imgwidth" id="imgwidth">
-  </div>
-
-
-  <div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'js/speech.js' %}"></script>
-  </div>
+    <div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static 'js/speech.js' %}"></script>
+    </div>
 </body>
 
 </html>
