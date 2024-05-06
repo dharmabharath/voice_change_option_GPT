@@ -111,7 +111,7 @@ function startConverting() {
             chatbox.insertBefore(createchatli(res.message, "outgoing"),lastMessage);
             document.getElementById("chat-bar-bottom").scrollIntoView(true);
             var utterance = new SpeechSynthesisUtterance(res.message);
-            speakimg.src = "../../static/images/stop1.png";
+            speakimg.src = "../../static/images/Stop1.png";
             r.innerHTML = "Stop Responding";
             speakimg;
             if (utterance) {
