@@ -67,4 +67,4 @@ jobs:
         with:
           app-name: 'speechrecognizeai'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_033E20DFFB804E5DB58EB737E9097B75 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_25F1D3F63061427284FDAF0FB9EC6001  }}
