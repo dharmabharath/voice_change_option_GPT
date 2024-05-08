@@ -1,5 +1,4 @@
-var ftr = "";
-
+let ftr = "";
 var condition_to_stop_synthesis = false;
 var spr = new webkitSpeechRecognition() || SpeechRecognition();
 var synth = window.speechSynthesis;
@@ -271,3 +270,28 @@ document.getElementById('chatbox').addEventListener('wheel', function(event) {
 
 // Call scrollToBottom function initially to scroll to the bottom
 scrollToBottom();
+
+
+// Add the following to the speech.js file
+ 
+// Function to open tabs using side Navbar
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByTagName("a");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.classList.add("active");
+}
+ 
+// Open the default tab and apply active class to nav1 div
+var defaultTab = document.getElementById("defaultOpen");
+defaultTab.classList.add("active");
+document.getElementById(
+  defaultTab.getAttribute("href").substring(1)
+).style.display = "block";

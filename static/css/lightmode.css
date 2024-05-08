@@ -1,306 +1,310 @@
+/*lightmod.css*/
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
-
+ 
 body {
-    margin: 0px;
-    width: 100%;
-    background-color: #edf1fa;
+  margin: 0px;
+  width: 100%;
+  background-color: #edf1fa;
 }
-
+ 
 .mainclass {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
-
+ 
 .headerpart {
-    display: flex;
-    align-items: center;
-    background: rgb(244 246 252);
-    justify-content: space-around;
-    height: 25%;
-
+  display: flex;
+  align-items: center;
+  background: rgb(244 246 252);
+  justify-content: space-around;
+  height: 25%;
 }
-
+ 
 .centerpart {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    top: 94px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: 94px;
+  /* left: 100px; */
 }
-
+ 
 .centertitle {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    left: 110px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: 110px;
 }
-
+ 
 .robotimg img {
-    width: 200px;
-    height: 200px;
+  width: 200px;
+  height: 200px;
 }
-
-
+ 
 .footerpart {
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    /* Place the element 50% down from the top */
-    left: 50%;
-    /* Place the element 50% across from the left */
-    transform: translate(-50%, -50%);
-    bottom: -20px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  /* Place the element 50% down from the top */
+  left: 60%;
+  /* Place the element 50% across from the left */
+  transform: translate(-50%, -50%);
+  bottom: -20px;
 }
-
-
+ 
 .taptext {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+ 
 .fooetrmicandwaves {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
-
+ 
 .micimg img {
-    width: 70px;
-    height: 70px;
-    cursor: pointer;
-
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
 }
-
+ 
 .sline img {
-    /* height: 100px; */
-    width: 190px;
+  /* height: 100px; */
+  width: 190px;
 }
-
+ 
 .fline img {
-    /* height: 100px; */
-    width: 190px;
+  /* height: 100px; */
+  width: 190px;
 }
-
+ 
 .taptext p {
-    color: rgba(170, 170, 170, 1);
-    font-family: "Raleway";
-    font-size: 10px;
-
+  color: rgba(170, 170, 170, 1);
+  font-family: "Raleway";
+  font-size: 10px;
 }
-
+ 
 .miniheader {
-    color: rgba(32, 60, 95, 0.25);
-    font-family: "Raleway";
-    font-size: 25px;
-    font-weight: 600;
+  color: rgba(32, 60, 95, 0.25);
+  font-family: "Raleway";
+  font-size: 25px;
+  font-weight: 600;
 }
-
+ 
 .largeheader {
-    color: rgba(32, 60, 95, 0.25);
-    font-family: "Raleway";
-    font-size: 40px;
-    font-weight: 600;
+  color: rgba(32, 60, 95, 0.25);
+  font-family: "Raleway";
+  font-size: 40px;
+  font-weight: 600;
 }
-
+ 
 .stflexcolor {
-    background-color: #edf1fa;
-    height: 75%;
-    width: 100%;
+  background-color: #edf1fa;
+  height: 75%;
+  width: 100%;
 }
-
+ 
 .voicegptimg img {
-    width: 133px;
+  width: 133px;
 }
-
+ 
 .voicegptimg {
-    padding: 7px;
+  padding: 7px;
 }
-
+ 
 .quadralogoimg img {
-    width: 109px;
+  width: 109px;
 }
-
+ 
 .quadralogoimg {
-    pad: 7px;
+  pad: 7px;
 }
-
+ 
 .speechecenterimg {
-    width: 28px;
-    height: 28px;
+  width: 28px;
+  height: 28px;
 }
-
+ 
 .incoming {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: end;
-    margin: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: end;
+  margin: 20px;
 }
-
+ 
 .textareafield {
-    height: 100px;
-    width: -webkit-fill-available;
+  height: 100px;
+  width: -webkit-fill-available;
 }
-
-
+ 
 .chatbox {
-   height: 407px;
-    overflow: hidden;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 900px;
-    align-items: center;
-    position: relative;
-    left: 188px;
-
+  height: 407px;
+  overflow: hidden;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 900px;
+  align-items: center;
+  position: relative;
+  left: 27px;
 }
-
+ 
 /* Style for incoming chat message */
 .chat.incoming {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    margin-right: 60px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 60px;
 }
-
+ 
 /* Style for outgoing chat message */
 .chat.outgoing {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    margin-bottom: 10px;
-    margin-left: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 10px;
+  margin-left: 62px;
 }
-
+ 
 /* Style for chat message bubble */
 .chat p {
-    background-color: #edf1fa;
-    color: #000;
-    border: 1px solid rgba(207, 207, 207, 1);
-    border-radius: 8px;
-    max-width: 70%;
-    word-wrap: break-word;
-    padding: 10px 15px;
-    font-family: "Raleway";
-    font-size: 14px;
+  background-color: #edf1fa;
+  color: #000;
+  border: 1px solid rgba(207, 207, 207, 1);
+  border-radius: 8px;
+  max-width: 70%;
+  word-wrap: break-word;
+  padding: 10px 15px;
+  font-family: "Raleway";
+  font-size: 14px;
 }
-
+ 
 /* Style for user avatar in incoming message */
 .chat.incoming img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    margin-left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-left: 20px;
 }
-
+ 
 /* Style for assistant avatar in outgoing message */
 .chat.outgoing img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 10px;
-    margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 20px;
 }
-
+ 
 /* Style for assistant avatar in outgoing message */
 .chat.outgoing p {
-    background-color: rgba(255, 255, 255, 1);
-    color: black;
-    /* animation: appear 0.2s forwards; */
+  background-color: rgba(255, 255, 255, 1);
+  color: black;
+  /* animation: appear 0.2s forwards; */
 }
-
-.robotimg{
-    animation: shake 3s infinite;
-    position: relative;
-    right: 60px;
+ 
+.robotimg {
+  animation: shake 3s infinite;
+  position: relative;
+  right: 60px;
 }
 @keyframes appear {
-    from {
-        opacity: 0; /* Start with opacity 0 */
-        transform: translateY(50px); /* Move letters down */
-    }
-    to {
-        opacity: 1; /* End with opacity 1 */
-        transform: translateY(0); /* Reset transform */
-    }
+  from {
+    opacity: 0; /* Start with opacity 0 */
+    transform: translateY(50px); /* Move letters down */
+  }
+  to {
+    opacity: 1; /* End with opacity 1 */
+    transform: translateY(0); /* Reset transform */
+  }
 }
-
-@keyframes shake{
-0%,100%{
+ 
+@keyframes shake {
+  0%,
+  100% {
     transform: translateY(0px);
-}
-50%{
+  }
+  50% {
     transform: translateY(-9px);
+  }
 }
-}
-
-
-@media screen and (min-width:1600px){
-    .voicegptimg {
-        padding: 20px;
-    }
-
-    .voicegptimg img {
-        width: 150px;
-    }
-
-    .quadralogoimg img {
-        width: 150px;
-    }
-
-    .miniheader {
-        font-size: 38px;
-    }
-    .largeheader {
-        font-size: 48px;
-    }
-    .robotimg img {
-        width: 350px;
-        height: 380px;
-    
-    }
-    .footerpart {
-        height: 156px;
-    }
-    .micimg img {
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-    }
-    .fline img {
-        width: 220px;
-    }
-    .sline img {
-        width: 220px;
-    }
-    .taptext p {
+ 
+@media screen and (min-width: 1600px) {
+  .voicegptimg {
+    padding: 20px;
+  }
+ 
+  .voicegptimg img {
+    width: 150px;
+  }
+ 
+  .quadralogoimg img {
+    width: 150px;
+  }
+ 
+  .miniheader {
+    font-size: 38px;
+  }
+  .largeheader {
+    font-size: 48px;
+  }
+  .robotimg img {
+    width: 350px;
+    height: 380px;
+  }
+  .footerpart {
+    height: 156px;
+  }
+  .micimg img {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+  }
+  .fline img {
+    width: 220px;
+  }
+  .sline img {
+    width: 220px;
+  }
+  .taptext p {
     font-size: 12px;
-    }
-    .chatbox {
-        height: 635px;
-        width: 1244px;
-        left: 346px;
-    }
-    .centertitle{
-        left: 137px;
-    }
-
-    .robotimg img{
-        right: 18px;
-        position: relative;
-    }
+  }
+  .chatbox {
+    height: 635px;
+    width: 1244px;
+    left: 122px;
+  }
+  .centertitle {
+    left: 137px;
+  }
+ 
+  .robotimg img {
+    right: 18px;
+    position: relative;
+  }
 }
-@media screen and (min-width:1400px) and (max-width:1599px){
-    .chatbox {
-        height: 531px;
-    }
+@media screen and (min-width: 1400px) and (max-width: 1599px) {
+  .chatbox {
+    height: 531px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .footerpart {
+    left: 62%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .robotimg {
+    right: 0px;
+    top: 175px;
+  }
 }
 /* .scroll-indicator {
     position: absolute;
@@ -310,16 +314,161 @@ body {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid #888; 
+    border-top: 5px solid #888;
     cursor: pointer;
 } */
+ 
+/* CSS for side navbar */
+.sidenav {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+ 
+.sidenavTabBox {
+  width: 100%;
+  position: relative;
+  top: 7%;
+}
+ 
+.sidenavTabBox a {
+  padding: 10px 8px 10px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #757575;
+  width: 80%;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  font-family: Raleway;
+}
+ 
+.sidenavTabBox img {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+ 
+.sidenavTabBox span {
+  position: relative;
+}
+ 
+.sidenav .voicegptimg {
+  padding: 20px;
+}
+ 
+.voicegptimg img {
+  position: relative;
+  left: 15%;
+}
+ 
+.quadralogoimg img {
+  position: relative;
+  left: 20%;
+  bottom: 50px;
+}
+ 
+.sidenav .quadralogoimg {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+ 
+/* CSS for main section */
+.main {
+  position: relative;
+  left: 300px;
+  width: 73%;
+}
+ 
+.topHeader {
+  font-size: 26px;
+  color: #24538d;
+  font-weight: 500;
+  font-family: "Raleway";
+  position: relative;
+  left: 10%;
+}
+ 
+.tabcontent {
+  display: none;
+  animation: 0.8s slideInFromLeft;
+}
+ 
+/* Add animation to "tabcontent" */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+ 
+.main .active {
+  display: block;
+  animation: 0.8s slideInFromLeft;
+}
+ 
+.sidenavTabBox .active {
+  color: #203c5f;
+  background-color: #edf1fa;
+  border-radius: 5px;
+}
+ 
+/* Additional styles for the second tab content */
+.second-tab-content {
+  width: 70%;
+  margin: auto;
+  font-family: "Raleway";
+  background-color: #fff;
+  border-radius: 5px;
+  color: #545454;
+  padding: 3% 5%;
+}
+ 
+.mainHeader {
+  font-size: 24px;
+  font-weight: 600;
+}
+ 
+.subHeader {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 60px;
+}
+ 
+.guideText {
+  font-size: 19px;
+  line-height: 25px;
+}
+ 
+.second-tab-content li {
+  font-size: 19px;
+  line-height: 25px;
+}
+ 
+.second-tab-content span {
+  font-weight: 600;
+}
 
-
-
-
-
-
-
-
-
-
+@media screen and (max-width:1300px) {
+    .sidenav{
+        width: 25%;
+    }
+    .main{
+        width: 70%;
+        left: 288px;
+    }
+ #nav2wi{
+    left: 25px;
+    position: relative;
+ }
+    
+}

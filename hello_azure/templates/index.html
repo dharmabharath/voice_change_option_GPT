@@ -1,87 +1,218 @@
+<!-- index.html file -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{%static 'css/lightmode.css'%}" id="styles">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="./lightmode.css" /> -->
     <title>Speech AI</title>
-    <link rel="shortcut icon" href="../../static/images/Maskgroup(1).png" type="image/x-icon">
-</head>
-
-<body>
-    <div class="mainclass">
-
-        <div class="headerpart">
-            <div class="voicegptimg">
-                <img src="../../../static/images/voicegpt.png" alt="">
-            </div>
-            <div class="quadralogoimg">
-                <img src="../../../static/images/quadralogo.png" alt="">
-            </div>
-        </div>
-        <div class="stflexcolor">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="../../static/images/Maskgroup(1).png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <!-- Side navbar -->
+    <div class="sidenav">
+      <div class="voicegptimg">
+        <img src="../../../static/images/voicegpt.png" alt="" />
+      </div>
+      <div class="sidenavTabBox">
+        <a
+          href="#"
+          onclick="openTab(event, 'nav1')"
+          style="margin-bottom: 20px"
+          id="defaultOpen"
+          ><img src="../../../static/images/chatIcon.png" alt="" /><span
+            >Voice Chat</span
+          ></a
+        >
+        <a href="#" onclick="openTab(event, 'nav2')"
+          ><img src="../../../static/images/guideIcon.png" alt="" /><span
+            >Support and Guide</span
+          ></a
+        >
+      </div>
+      <div class="quadralogoimg">
+        <img src="../../../static/images/quadralogo.png" alt="" />
+      </div>
+    </div>
+ 
+    <!-- Main section -->
+    <div class="main">
+      <div id="nav1" class="tabcontent active">
+        <p class="topHeader">Voice Chat</p>
+        <div class="mainclass">
+          <div class="stflexcolor">
             <div class="inputbox" id="inputbox">
-                <div class="textareafield">
-                    <ul class="chatbox" id="chatbox">
-                        <!-- <li class="chat incoming">
-                            <img src="../../static/images/User-60.png" alt="" id="speechecenterimg" class="speechecenterimg">
-                                <p></p>
-                           
-                        </li>
-                        <li class="chat outgoing">
-                            <img src="../../static/images/chatrobo.png" alt="" id="speechecenterimg" class="speechecenterimg">
-                                <p></p>
-                        </li> -->
-                        <div class="scroll-indicator"></div>    
-                        <div id="chat-bar-bottom">
-                        </div>                  
-                    </ul>
-                    
-                </div>
+              <div class="textareafield">
+                <ul class="chatbox" id="chatbox">
+                  <!-- Chat messages can be added here -->
+                  <div class="scroll-indicator"></div>
+                  <div id="chat-bar-bottom"></div>
+                </ul>
+              </div>
             </div>
             <div class="centerpart" id="centerpart">
-                <div class="centertitle">
-
-                    <p class="miniheader">Hello!</p>
-                    <text class="largeheader">How Can I Assist You?</text>
-
-                </div>
-                <div class="robotimg">
-                    <img src="../../../static/images/robotimg.png" alt="">
-                </div>
+              <div class="centertitle">
+                <p class="miniheader">Hello!</p>
+                <p class="largeheader">How Can I Assist You?</p>
+              </div>
+              <div class="robotimg">
+                <img src="../../../static/images/robotimg.png" alt="" />
+              </div>
             </div>
             <div class="footerpart">
-                <div class="taptext">
-                    <p id="result">Tap the button to speak</p>
+              <div class="taptext">
+                <p id="result">Tap the button to speak</p>
+              </div>
+              <div class="fooetrmicandwaves">
+                <div class="fline">
+                  <img
+                    src="../../../static/images/Line.png"
+                    alt=""
+                    id="fline"
+                  />
                 </div>
-                <div class="fooetrmicandwaves">
-                    <div class="fline" >
-                        <img src="../../../static/images/Line.png" alt="" id="fline">
-                    </div>
-                    <div class="micimg">
-                        <img src="../../../static/images/newmic.png" alt="" onclick="initial_call(document.getElementById('result').textContent)" id="speakimg">
-                    </div>
-                    <div class="sline" >
-                        <img src="../../../static/images/Line.png" alt="" id="sline">
-                    </div>
+                <div class="micimg">
+                  <img
+                    src="../../../static/images/newmic.png"
+                    alt=""
+                    onclick="initial_call(document.getElementById('result').textContent)"
+                    id="speakimg"
+                  />
                 </div>
+                <div class="sline">
+                  <img
+                    src="../../../static/images/Line.png"
+                    alt=""
+                    id="sline"
+                  />
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-
+      </div>
+ 
+      <div id="nav2" class="tabcontent">
+        <p class="topHeader">Support and Guide</p>
+        <div class="second-tab-content">
+          <p class="mainHeader">
+            Voice-Based Chat GPT Support and Guide Document
+          </p>
+          <p class="subHeader">Introduction</p>
+          <p class="guideText">
+            Welcome to our voice-based chat GPT powered by Azure OpenAI! This
+            document serves as a comprehensive guide to help you navigate and
+            utilize the features of our chatbot effectively.
+          </p>
+          <p class="subHeader">Getting Started</p>
+          <p class="guideText">
+            To access the voice-based chat GPT, follow these simple steps:
+          </p>
+          <ol>
+            <li>Visit our web application</li>
+            <li>Click on the mike icon</li>
+            <li>Start a conversation by typing or speaking your query.</li>
+          </ol>
+ 
+          <p class="subHeader">Basic Commands</p>
+          <p class="guideText">
+            You can interact with our chatbot using the following basic
+            commands:
+          </p>
+          <ul>
+            <li>"Hello" or "Hi": Start a conversation with the chatbot.</li>
+            <li>
+              "What can you do?": Learn about the capabilities of the chatbot.
+            </li>
+            <li>"Help": Get assistance with using the chatbot.</li>
+            <li>"Goodbye" or "Exit": End the conversation with the chatbot.</li>
+          </ul>
+ 
+          <p class="subHeader">Advanced Features</p>
+          <p class="guideText">
+            Our chatbot offers several advanced features to enhance your
+            experience:
+          </p>
+          <p class="guideText">
+            <span>Natural Language Understanding:</span> The chatbot can
+            understand and respond to complex queries in natural language.
+          </p>
+          <p class="guideText">
+            <span>Contextual Understanding:</span>It maintains context across
+            conversations, allowing for more coherent interactions.
+          </p>
+          <p class="guideText">
+            <span>Multimodal Input:</span>You can input text or speak your
+            queries using voice commands.
+          </p>
+          <p class="guideText">
+            <span>Personalization:</span> The chatbot can learn from user
+            interactions to provide personalized responses over time.
+          </p>
+ 
+          <p class="subHeader">Troubleshooting</p>
+          <p class="guideText">
+            Encountering issues with the chatbot? Here are some common
+            troubleshooting steps:
+          </p>
+          <ul>
+            <li>Check your internet connection.</li>
+            <li>Refresh the chat interface.</li>
+            <li>Try using different browsers or devices.</li>
+            <li>
+              Contactour technical support team for further assistance at
+              support@example.com.
+            </li>
+          </ul>
+ 
+          <p class="subHeader">Best Practices</p>
+          <p class="guideText">
+            To make the most out of your interactions with the chatbot, consider
+            the following best practices:
+          </p>
+          <ul>
+            <li>
+              Speak clearly and enunciate your words when using voice commands.
+            </li>
+            <li>
+              Provide specific details when asking questions to receive accurate
+              responses.
+            </li>
+            <li>
+              Use natural language and avoid complex jargon to improve
+              understanding.
+            </li>
+            <li>
+              Provide feedback on the chatbot's responses to help us improve its
+              performance.
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="{% static 'js/speech.js' %}"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="../../static/js/speech.js"></script>
+      <script src="{% static 'js/speech.js' %}"></script>
     </div>
-</body>
-
+  </body>
 </html>
