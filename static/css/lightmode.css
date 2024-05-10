@@ -69,8 +69,8 @@ body {
 }
  
 .micimg img {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
  
@@ -144,7 +144,7 @@ body {
 }
  
 .chatbox {
-  height: 407px;
+  height: 390px;
   overflow: hidden;
   list-style-type: none;
   padding: 0;
@@ -321,7 +321,8 @@ body {
 /* CSS for side navbar */
 .sidenav {
   height: 100%;
-  width: 20%;
+  /* width: 20%; */
+  width: 378px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -348,6 +349,10 @@ body {
   display: flex;
   align-items: center;
   font-family: Raleway;
+}
+.sidenavTabBox >a:hover{
+    background-color: #edf1fa;
+    border-radius: 5px;
 }
  
 .sidenavTabBox img {
@@ -384,13 +389,13 @@ body {
 .main {
   position: relative;
   left: 300px;
-  width: 73%;
+  width: 72%;
 }
  
 .topHeader {
   font-size: 26px;
   color: #24538d;
-  font-weight: 500;
+  font-weight: 600;
   font-family: "Raleway";
   position: relative;
   left: 10%;
@@ -398,7 +403,7 @@ body {
  
 .tabcontent {
   display: none;
-  animation: 0.8s slideInFromLeft;
+  /* animation: 0.8s slideInFromLeft; */
 }
  
 /* Add animation to "tabcontent" */
@@ -413,13 +418,14 @@ body {
  
 .main .active {
   display: block;
-  animation: 0.8s slideInFromLeft;
+  /* animation: 0.8s slideInFromLeft; */
 }
  
 .sidenavTabBox .active {
   color: #203c5f;
   background-color: #edf1fa;
   border-radius: 5px;
+  font-weight: 600;
 }
  
 /* Additional styles for the second tab content */
@@ -460,7 +466,8 @@ body {
 
 @media screen and (max-width:1300px) {
     .sidenav{
-        width: 25%;
+        /* width: 25%; */
+        width: 317px;
     }
     .main{
         width: 70%;

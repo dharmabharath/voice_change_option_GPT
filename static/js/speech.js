@@ -11,6 +11,8 @@ const inputbox = document.getElementById("inputbox");
 const fline = document.getElementById("fline");
 const sline = document.getElementById("sline");
 const speakimg = document.getElementById("speakimg");
+const getidname=document.getElementById("chaticon");
+const getidname2=document.getElementById("guideicon");
 let firstSpeechrecog = false;
 inputbox.style.display = "none";
 
@@ -54,9 +56,9 @@ function initial_call(event) {
 }
 
 function startConverting() {
-  fline.style.height = "100px";
+  fline.style.height = "80px";
   fline.src = "../../static/images/soundwave.gif";
-  sline.style.height = "100px";
+  sline.style.height = "80px";
   sline.src = "../../static/images/soundwave.gif";
   synth.cancel();
   ftr = "";
@@ -112,11 +114,11 @@ function startConverting() {
             var utterance = new SpeechSynthesisUtterance(res.message);
             speakimg.src = "../../static/images/Stop1.png";
             r.innerHTML = "Stop Responding";
-            speakimg;
+            // speakimg;
             if (utterance) {
-              fline.style.height = "100px";
+              fline.style.height = "80px";
               fline.src = "../../static/images/soundwave.gif";
-              sline.style.height = "100px";
+              sline.style.height = "80px";
               sline.src = "../../static/images/soundwave.gif";
 
               synth.speak(utterance);
@@ -272,10 +274,17 @@ document.getElementById('chatbox').addEventListener('wheel', function(event) {
 scrollToBottom();
 
 
-// Add the following to the speech.js file
  
 // Function to open tabs using side Navbar
 function openTab(evt, tabName) {
+  if(tabName=="nav1"){
+    getidname.src="../../static/images/chatIcon.png";
+    getidname2.src="../../static/images/guideIcon.png";
+  }
+  else if(tabName=="nav2"){
+    getidname.src="../../static/images/chatIconunactive.png";
+    getidname2.src="../../static/images/guideIconactive.png";;
+  }
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
