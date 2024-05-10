@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'speechAI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FC513613D1A34A4BAD205FA0861CB506 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_824B8176F2B94DB28A7A1BC0496C79C2 }}
