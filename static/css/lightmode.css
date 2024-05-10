@@ -237,6 +237,9 @@ body {
 }
  
 @media screen and (min-width: 1600px) {
+  .chat.outgoing{
+    margin-left: 7px;
+  }
   .voicegptimg {
     padding: 20px;
   }
