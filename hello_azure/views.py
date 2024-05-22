@@ -31,7 +31,7 @@ def one(request):
 @csrf_exempt
 def ask_openai(request):
     audio_data_list = []
-    print("saghd",request.POST['send'])
+    # print("saghd",request.POST['send'])
     if request.method=='POST':
         client = AzureOpenAI(
                 azure_endpoint="https://casggpt-4.openai.azure.com/",
@@ -39,11 +39,14 @@ def ask_openai(request):
                 api_version="2023-05-15"
                 )
         deployment_id="gpt-35-turbo-16k"
-        tts_sentence_end = [ ".", "!", "?", ";", "。", "！", "？", "；", "\n" ]
+        tts_sentence_end = [ ".", "!", "?", ";", "。", "！", "？", "；" ]
  
       
         # Ask Azure OpenAI in streaming way
-        response = client.chat.completions.create(model=deployment_id, max_tokens=200, stream=True, messages=[
+        response = client.chat.completions.create(model=deployment_id, max_tokens=8000, stream=True, messages=[
+                    {  "role": "system",
+                        "content": "You are a helpful assistant that formats any given input into Markdown."
+                        },
             {"role": "user", "content": request.POST['send']}
         ])
         
@@ -60,7 +63,7 @@ def ask_openai(request):
                         if chunk_message in tts_sentence_end: # sentence end found
                             text = ''.join(collected_messages).strip() # join the recieved message together to build a sentence
                             if text != '' and stop_speech_synthesis!=True: # if sentence only have \n or space, we could skip
-                                print(f"Speech synthesized to speaker for: {text}")
+                                # print(f"Speech synthesized to speaker for: {text}")
                                 
                                 # result = speech_synthesizer.speak_text(text)
                                 last_tts_request +=text
@@ -74,8 +77,8 @@ def ask_openai(request):
                                 
         except Exception as e:
             print("Erroe",e)
-        # print("ltts",type(last_tts_request))
-        print("storeHistory",storeHistory)
+        # print("ltts",last_tts_request)
+        # print("storeHistory",storeHistory)
         return JsonResponse({'message':last_tts_request,"storedata":storeHistory}, status=200)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)

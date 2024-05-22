@@ -15,7 +15,6 @@ const getidname=document.getElementById("chaticon");
 const getidname2=document.getElementById("guideicon");
 let firstSpeechrecog = false;
 inputbox.style.display = "none";
-
 const createchatli = (message, className) => {
   if (className == "incoming") {
     const chatli = document.createElement("li"); // Use createElement instead of createDocumentFragment
@@ -31,16 +30,18 @@ const createchatli = (message, className) => {
     return chatli;
   } 
   else if (className == "outgoing") {
-    const chatli = document.createElement("li"); // Use createElement instead of createDocumentFragment
-    chatli.classList.add("chat", className);
+    // console.log(message);
+    const chatli = document.createElement("div"); // Use createElement instead of createDocumentFragment
+    chatli.classList.add("outgoingchat", className);
     let chatcontent =
       className == "incoming"
         ? `<p>${message}</p>`
-        : ` <img src="../../static/images/chatrobo.png" alt="" id="speechecenterimg" class="speechecenterimg"><p>${message}</p>`;
-    chatli.innerHTML = chatcontent;
-    
-    // document.getElementById("chat-bar-bottom").scrollIntoView(true);
+        : `<img src="../../static/images/chatrobo.png" alt="Chat Robot" id="speechecenterimg" class="speechecenterimg"><div><p>${message}</p></div>`;
+    // console.log(chatcontent);
+    chatli.innerHTML = marked.parse(chatcontent);
+ 
     return chatli;
+  
   }
 };
 
@@ -108,6 +109,23 @@ function startConverting() {
           },
 
           success: function (res) {
+          let s=convertToMarkdown(res.message)
+            // let str = res.message;
+            // let delimiter = "(t2pnl)";
+            // let parts = str.split(delimiter);
+
+            // console.log("parts",parts);
+
+            // console.log("res",res);
+            // for (let i of parts){
+            //   if (i!=""){
+            //     const bulletPoint = `⚫ ${i.trim()}`;
+            //     const lastMessage = chatbox.lastElementChild;
+            //     chatbox.insertBefore(createchatli(bulletPoint, "outgoing"),lastMessage);
+            //     document.getElementById("chat-bar-bottom").scrollIntoView(true);
+            //   }
+   
+            // }
             const lastMessage = chatbox.lastElementChild;
             chatbox.insertBefore(createchatli(res.message, "outgoing"),lastMessage);
             document.getElementById("chat-bar-bottom").scrollIntoView(true);
@@ -162,6 +180,23 @@ function startConverting() {
     sline.src = "../../static/images/Line.png";
   }
 }
+
+function convertToMarkdown(text) {
+  // Handle paragraphs
+  text = text.replace(/\n\n/g, "\n\n---\n\n"); // Separate paragraphs with horizontal rule
+
+  // Handle bold text
+  text = text.replace(/\*\*(.+?)\*\*/g, "**$1**"); // Double asterisks for bold
+
+  // Handle italic text
+  text = text.replace(/\_(.+?)\_/g, "_$1_"); // Underscores for italics
+
+  // Handle headings (assumes ## for level 2)
+  text = text.replace(/^([^#].*)/gm, "## $1"); // Add ## to beginning of text for level 2 heading
+
+  return text;
+}
+
 
 function toggleSpeechSynthesis() {
   without_speech = "nospeech";
