@@ -195,6 +195,9 @@ body {
   font-family: "Raleway";
   font-size: 14px;
 }
+.outgoingchat div pre{
+  padding-left: 30px;
+}
 .outgoingchat div h2  {
   padding: 0px 20px 0px 30px;
 }
@@ -529,4 +532,11 @@ body {
     position: relative;
  }
     
+}
+
+select >option{
+  border-color: transparent;
+  background-color: #edf1fa;
+  cursor: pointer;
+  font-family: "Raleway";
 }

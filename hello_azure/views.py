@@ -6,8 +6,6 @@ from openai import AzureOpenAI
 from django.views.decorators.csrf import csrf_exempt 
 from django.views.decorators.http import require_http_methods
 import os
-# import pyaudio
-# import wave
 
 output_directory =r"static/audio"
 os.makedirs(output_directory, exist_ok=True)
@@ -26,12 +24,9 @@ def one(request):
     global storeHistory
     context={'storeHistory': storeHistory}
     # storeHistory=[]
-    print(storeHistory)
     return render(request,'index.html',context)
 @csrf_exempt
 def ask_openai(request):
-    audio_data_list = []
-    # print("saghd",request.POST['send'])
     if request.method=='POST':
         client = AzureOpenAI(
                 azure_endpoint="https://casggpt-4.openai.azure.com/",
@@ -63,31 +58,19 @@ def ask_openai(request):
                         if chunk_message in tts_sentence_end: # sentence end found
                             text = ''.join(collected_messages).strip() # join the recieved message together to build a sentence
                             if text != '' and stop_speech_synthesis!=True: # if sentence only have \n or space, we could skip
-                                # print(f"Speech synthesized to speaker for: {text}")
-                                
-                                # result = speech_synthesizer.speak_text(text)
-                                last_tts_request +=text
-                                
-                                
-                                collected_messages.clear()
-            # storeHistory.append({"user":request.POST['send'],"assistant":last_tts_request})
-            # last_tts_Response = speech_synthesizer.speak_text_async(last_tts_request) 
-            
+                                last_tts_request +=text                          
+                                collected_messages.clear()           
         
                                 
         except Exception as e:
             print("Erroe",e)
-        # print("ltts",last_tts_request)
-        # print("storeHistory",storeHistory)
         return JsonResponse({'message':last_tts_request,"storedata":storeHistory}, status=200)
-
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 #stop speech listening
 @csrf_exempt
 def signal_stop_speech(request):
-    print("enter stop")
     global stop_speech_synthesis
     stop_speech_synthesis = True
     if stop_speech_synthesis==True:
