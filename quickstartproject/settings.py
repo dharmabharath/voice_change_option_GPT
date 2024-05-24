@@ -25,11 +25,7 @@ SECRET_KEY = '1234567890'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['voicegpt.azurewebsites.net']
-=======
 ALLOWED_HOSTS = ['https://voicegpt.azurewebsites.net/']
->>>>>>> d38afc859fc448a03edbfab048eedfa69cf99083
 
 # DEBUG = True
 # ALLOWED_HOSTS = []
