@@ -27,8 +27,8 @@ SECRET_KEY = '1234567890'
 DEBUG = False
 ALLOWED_HOSTS = ['voicegpt.azurewebsites.net']
 
-DEBUG = True
-ALLOWED_HOSTS = []
+# DEBUG = True
+# ALLOWED_HOSTS = []
 
 
 # Application definition
