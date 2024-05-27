@@ -20,13 +20,13 @@ const voiceSelect = document.querySelector("select");
 })();
 
 
-// let selectedOption2=""
-// voiceSelect.addEventListener('change', () => {
-//   selectedOption2 = voiceSelect.selectedOptions[0].getAttribute('data-name');
-//   // console.log("change");
-//   // console.log("selectedOption2",selectedOption2);
-//   localStorage.setItem('selectvoice', selectedOption2);
-// });
+let selectedOption2=""
+voiceSelect.addEventListener('change', () => {
+  selectedOption2 = voiceSelect.selectedOptions[0].getAttribute('data-name');
+  // console.log("change");
+  // console.log("selectedOption2",selectedOption2);
+  localStorage.setItem('selectvoice', selectedOption2);
+});
 
 
 function populateVoiceList() {
@@ -149,17 +149,17 @@ function startConverting() {
               // console.log("Selectedoption2",selectedOption2);
               for (let voice of voices) {
      
-                if (voice.name === selectedOption ) {
-                  // localStorage.setItem("selectvoice",selectedOption);
-                  utterance.voice = voice;
-                  break;
-                }
-                // if (localStorage.getItem("selectvoice")){
-                //   if (voice.name==localStorage.getItem("selectvoice")){
-                //     utterance.voice = voice;
-                //     break;
-                //   }
+                // if (voice.name === selectedOption ) {
+                //   // localStorage.setItem("selectvoice",selectedOption);
+                //   utterance.voice = voice;
+                //   break;
                 // }
+                if (localStorage.getItem("selectvoice")){
+                  if (voice.name==localStorage.getItem("selectvoice")){
+                    utterance.voice = voice;
+                    break;
+                  }
+                }
             }
               synth.speak(utterance);
             }
